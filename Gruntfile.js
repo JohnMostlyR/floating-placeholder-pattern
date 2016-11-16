@@ -108,8 +108,8 @@ module.exports = function (grunt) {
           annotation: 'public/assets/css/' // ...to the specified directory
         },
         processors: [
-          //require('pixrem')(), // add fallbacks for rem units
-          require('autoprefixer')({browsers: ['last 2 versions']}), // add vendor prefixes
+          //  require('pixrem')(), // add fallbacks for rem units
+          require('autoprefixer')({ browsers: ['last 2 versions'] }), // add vendor prefixes
         ]
       },
       dist: {
@@ -122,8 +122,8 @@ module.exports = function (grunt) {
           url: 'http://localhost:3000',
           width: 1200,
           height: 900,
-          outputfile: 'public/assets/css/sstar-above-the-fold.css',
-          filename: 'public/assets/css/sstar-main.css', // Using path.resolve( path.join( ... ) ) is a good idea here
+          outputfile: 'public/assets/css/above-the-fold.css',
+          filename: 'public/assets/css/main.css', // Using path.resolve( path.join( ... ) ) is a good idea here
           buffer: 800 * 1024,
           ignoreConsole: false
         }
@@ -206,9 +206,9 @@ module.exports = function (grunt) {
       }
     },
     clean: {  // Clean folder(s) of unnecessary files
-      css: ["public/assets/css/**/*.css", "!public/assets/css/**/*.min.css"],
-      js: ["public/assets/js/**/*.js", "!public/assets/js/**/*.min.js"],
-      allMap: ["public/assets/**/*.map"]
+      css: ['public/assets/css/**/*.css', '!public/assets/css/**/*.min.css'],
+      js: ['public/assets/js/**/*.js', '!public/assets/js/**/*.min.js'],
+      allMap: ['public/assets/**/*.map']
     }
   });
 
