@@ -1,0 +1,20 @@
+# Webstorm cache folder
+.idea
+
+# Node modules folder
+node_modules
+
+# SASS cache folder
+sass/.sass-cache
+
+# Compiled CSS files
+public/assets/css/**
+
+# Compiled JavaScript files
+public/assets/js/**
+
+# Optimized images
+public/assets/img/**
+
+# Compiled HTML files
+public/**/*.html
