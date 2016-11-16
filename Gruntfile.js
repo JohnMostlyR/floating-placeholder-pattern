@@ -136,8 +136,8 @@ module.exports = function (grunt) {
       },
       subtask1: {
         files: {
-          'public/assets/css/sstar-main.min.css': 'public/assets/css/sstar-main.css',
-          'public/assets/css/sstar-web-fonts.min.css': 'public/assets/css/sstar-web-fonts.css',
+          'public/assets/css/main.min.css': 'public/assets/css/main.css',
+          'public/assets/css/web-fonts.min.css': 'public/assets/css/web-fonts.css',
         }
       },
       subtask2: {
@@ -150,7 +150,7 @@ module.exports = function (grunt) {
       },
       subtask3: {
         files: {
-          'public/assets/css/sstar-above-the-fold.min.css': 'public/assets/css/sstar-above-the-fold.css',
+          'public/assets/css/above-the-fold.min.css': 'public/assets/css/above-the-fold.css',
         }
       }
     },
@@ -166,7 +166,7 @@ module.exports = function (grunt) {
         helpers: '*.js',
         partials: 'views/partials/*.hbs',
         registerFullPath: true,
-        templateData: 'views/mock_data/en.json'
+        templateData: 'views/data/en.json'
       },
     },
     htmlmin: {  // Minify HTML files
