@@ -11,11 +11,11 @@ module.exports = function (grunt) {
       },
       babel: {
         files: ['js/**/*.js'],
-        tasks: ['babel', 'uglify:dev']
+        tasks: ['babel:dev']
       },
       sass: {
         files: ['sass/**/*.{scss,sass}', 'sass/_partials/**/*.{scss,sass}'],
-        tasks: ['sass:dev', 'postcss', 'cssnano']
+        tasks: ['sass:dev', 'postcss']
       },
       handlebars: {
         files: ['views/**/*.{hbs,handlebars}'],
@@ -36,6 +36,15 @@ module.exports = function (grunt) {
         sourceMap: true,
         presets: ['es2015']
       },
+      dev: {
+        files: [{
+          expand: true,
+          cwd: 'js',
+          src: ['**/*.js'],
+          dest: 'public/assets/js',
+          ext: '.min.js'
+        }]
+      },
       dist: {
         files: [{
           expand: true,
@@ -47,19 +56,6 @@ module.exports = function (grunt) {
       }
     },
     uglify: { // Minify JavaScript files
-      dev: {
-        options: {
-          sourceMap: true,
-          preserveComments: 'all'
-        },
-        files: [{
-          expand: true,
-          cwd: 'public/assets/js',
-          src: '**/*.js',
-          dest: 'public/assets/js',
-          ext: '.min.js'
-        }]
-      },
       dist: {
         options: {
           sourceMap: false,
@@ -84,7 +80,7 @@ module.exports = function (grunt) {
           cwd: 'sass',
           src: '*.scss',
           dest: 'public/assets/css',
-          ext: '.css'
+          ext: '.min.css'
         }]
       },
       dist: {
@@ -108,8 +104,8 @@ module.exports = function (grunt) {
           annotation: 'public/assets/css/' // ...to the specified directory
         },
         processors: [
-          //  require('pixrem')(), // add fallbacks for rem units
-          require('autoprefixer')({ browsers: ['last 2 versions'] }), // add vendor prefixes
+          //require('pixrem')(), // add fallbacks for rem units
+          require('autoprefixer')({browsers: ['last 2 versions']}), // add vendor prefixes
         ]
       },
       dist: {
@@ -117,13 +113,24 @@ module.exports = function (grunt) {
       }
     },
     criticalcss: {  // Create above-the-fold CSS
-      custom: {
+      dev: {
         options: {
           url: 'http://localhost:3000',
           width: 1200,
           height: 900,
-          outputfile: 'public/assets/css/above-the-fold.css',
-          filename: 'public/assets/css/main.css', // Using path.resolve( path.join( ... ) ) is a good idea here
+          outputfile: 'public/assets/css/sstar-above-the-fold.css',
+          filename: 'public/assets/css/sstar-main.min.css', // Using path.resolve( path.join( ... ) ) is a good idea here
+          buffer: 800 * 1024,
+          ignoreConsole: false
+        }
+      },
+      prod: {
+        options: {
+          url: 'http://localhost:3000',
+          width: 1200,
+          height: 900,
+          outputfile: 'public/assets/css/sstar-above-the-fold.css',
+          filename: 'public/assets/css/sstar-main.css', // Using path.resolve( path.join( ... ) ) is a good idea here
           buffer: 800 * 1024,
           ignoreConsole: false
         }
@@ -136,8 +143,8 @@ module.exports = function (grunt) {
       },
       subtask1: {
         files: {
-          'public/assets/css/main.min.css': 'public/assets/css/main.css',
-          'public/assets/css/web-fonts.min.css': 'public/assets/css/web-fonts.css',
+          'public/assets/css/sstar-main.min.css': 'public/assets/css/sstar-main.css',
+          'public/assets/css/sstar-web-fonts.min.css': 'public/assets/css/sstar-web-fonts.css',
         }
       },
       subtask2: {
@@ -150,7 +157,7 @@ module.exports = function (grunt) {
       },
       subtask3: {
         files: {
-          'public/assets/css/above-the-fold.min.css': 'public/assets/css/above-the-fold.css',
+          'public/assets/css/sstar-above-the-fold.min.css': 'public/assets/css/sstar-above-the-fold.css',
         }
       }
     },
@@ -166,7 +173,7 @@ module.exports = function (grunt) {
         helpers: '*.js',
         partials: 'views/partials/*.hbs',
         registerFullPath: true,
-        templateData: 'views/data/en.json'
+        templateData: 'views/mock_data/en.json'
       },
     },
     htmlmin: {  // Minify HTML files
@@ -205,10 +212,10 @@ module.exports = function (grunt) {
         }]
       }
     },
-    clean: {  // Clean folder(s) of unnecessary files
-      css: ['public/assets/css/**/*.css', '!public/assets/css/**/*.min.css'],
-      js: ['public/assets/js/**/*.js', '!public/assets/js/**/*.min.js'],
-      allMap: ['public/assets/**/*.map']
+    clean: {  // Clean folder(s) of left over files
+      css: ["public/assets/css/**/*.css", "!public/assets/css/**/*.min.css"],
+      js: ["public/assets/js/**/*.js", "!public/assets/js/**/*.min.js"],
+      allMap: ["public/assets/**/*.map"]
     }
   });
 
@@ -238,13 +245,10 @@ module.exports = function (grunt) {
     'dev',
     [
       'newer:imagemin',             // Minify images in the images folder and copy to public/assets/img
-      'babel',                      // Compile ES6 to ES5 in the js folder and copy to public/assets/js
-      'uglify:dev',                 // Minify all JavaScript in the public/assets/js folder
+      'babel:dev',                  // Compile ES6 to ES5 in the js folder and copy to public/assets/js
       'sass:dev',                   // Compile SASS to CSS in the sass folder and copy to public/assets/css
       'postcss',                    // Perform postcss tasks on css files in public/assets/css
-      'cssnano:subtask1',           // Minify css in public/assets/css
-      'cssnano:subtask2',           // Minify css in public/assets/css with the 'safe' option set to 'false'
-      'criticalcss:custom',         // Create critical 'above-the-fold' css in public/assets/css
+      'criticalcss:dev',            // Create critical 'above-the-fold' css in public/assets/css
       'cssnano:subtask3',           // Minify the above-the-fold css in public/assets/css
       'compile-handlebars:static',  // Compile handlebar files in the views folder to the public folder
       'htmlmin:dev',                // Minify all HTML files in the public folder
@@ -256,17 +260,18 @@ module.exports = function (grunt) {
   grunt.registerTask(
     'default',
     [
-      'newer:imagemin',
-      'newer:babel',
-      'newer:uglify:dist',
-      'newer:sass:dist',
-      'newer:postcss',
-      'newer:cssnano:subtask1',
-      'newer:criticalcss:custom',
-      'newer:cssnano:subtask2',
-      'compile-handlebars:static',
-      'newer:htmlmin:dist',
-      'clean'
+      'newer:imagemin',             // Minify images in the images folder and copy to public/assets/img
+      'babel:dist',                 // Compile ES6 to ES5 in the js folder and copy to public/assets/js
+      'uglify:dist',                // Minify all JavaScript in the public/assets/js folder
+      'sass:dist',                  // Compile SASS to CSS in the sass folder and copy to public/assets/css
+      'postcss',                    // Perform postcss tasks on css files in public/assets/css
+      'cssnano:subtask1',           // Minify css in public/assets/css
+      'cssnano:subtask2',           // Minify css in public/assets/css with the 'safe' option set to 'false'
+      'criticalcss:dist',           // Create critical 'above-the-fold' css in public/assets/css
+      'cssnano:subtask3',           // Minify the above-the-fold css in public/assets/css
+      'compile-handlebars:static',  // Compile handlebar files in the views folder to the public folder
+      'htmlmin:dist',               // Minify all HTML files in the public folder
+      'clean'                       // Clean folder(s) of left over files
     ]
   );
 
