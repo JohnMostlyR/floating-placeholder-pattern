@@ -2,7 +2,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     aws: grunt.file.readJSON('aws-keys.json'), // Read the file
-    aws_s3: {
+    aws_s3: { // https://github.com/MathieuLoutre/grunt-aws-s3
       options: {
         accessKeyId: '<%= aws.AWSAccessKeyId %>', // Use the variables
         secretAccessKey: '<%= aws.AWSSecretKey %>', // You can also use env variables
@@ -47,20 +47,20 @@ module.exports = function (grunt) {
       },
       production: {
         options: {
-          bucket: 'sitterstar.com',
+          bucket: 'my-wonderful-production-bucket',
           differential: true, // Only uploads the files that have changed
           gzipRename: 'ext', // when uploading a gz file, keep the original extension
         },
         files: [
           {
             expand: true,
-            cwd: 'public/',
+            cwd: 'dist/',
             src: ['*'],
             dest: '/'
           },
           {
             expand: true,
-            cwd: 'public/assets/',
+            cwd: 'dist/assets/',
             src: ['**'],
             dest: 'assets/',
             params: {
@@ -74,7 +74,7 @@ module.exports = function (grunt) {
       },
       clean_production: {
         options: {
-          bucket: 'sitterstar.com',
+          bucket: 'my-wonderful-production-bucket',
           debug: true // Doesn't actually delete but shows log
         },
         files: [
@@ -97,7 +97,7 @@ module.exports = function (grunt) {
       },
       download_production: {
         options: {
-          bucket: 'sitterstar.com'
+          bucket: 'my-wonderful-production-bucket'
         },
         files: [
           {
@@ -107,7 +107,7 @@ module.exports = function (grunt) {
           }, // Downloads the content of app/ to backup/
           {
             dest: 'assets/',
-            cwd: 'backup-assets/',
+            cwd: 'backup/assets/',
             exclude: '**/*copy*',
             action: 'download'
           }, // Downloads everything which doesn't have copy in the name
@@ -136,40 +136,40 @@ module.exports = function (grunt) {
       dev: {
         files: [{
           expand: true,
-          cwd: 'js',
+          cwd: 'src/assets/scripts',
           src: ['**/*.js'],
-          dest: 'public/assets/js',
+          dest: 'dist/assets/scripts',
           ext: '.min.js'
         }]
       },
       dist: {
         files: [{
           expand: true,
-          cwd: 'js',
+          cwd: 'src/assets/scripts',
           src: ['**/*.js'],
-          dest: 'public/assets/js',
-          ext: '.js'
+          dest: 'dist/assets/scripts',
+          ext: '.min.js'
         }]
       }
     },
     clean: {  // Clean folder(s) of left over files
-      css: ['public/assets/css/**/*.css', '!public/assets/css/**/*.min.css'],
-      js: ['public/assets/js/**/*.js', '!public/assets/js/**/*.min.js'],
-      allMap: ['public/assets/**/*.map']
+      css: ['dist/assets/stylesheets/**/*.css', '!dist/assets/stylesheets/**/*.min.css'],
+      js: ['dist/assets/scripts/**/*.js', '!dist/assets/scripts/**/*.min.js'],
+      allMap: ['dist/assets/**/*.map']
     },
     'compile-handlebars': { // Compile handlebars files
       static: {
         files: [{
           expand: true,
-          cwd: './views/',
+          cwd: 'src',
           src: '*.hbs',
-          dest: './public/',
+          dest: 'dist',
           ext: '.html'
         }],
         helpers: '*.js',
-        partials: 'views/partials/*.hbs',
+        partials: 'src/partials/*.hbs',
         registerFullPath: true,
-        templateData: 'views/mock_data/en.json'
+        templateData: 'src/data/en.json'
       },
     },
     compress: {
@@ -178,30 +178,30 @@ module.exports = function (grunt) {
           mode: 'gzip'
         },
         expand: true,
-        cwd: 'public/assets/',
+        cwd: 'dist/assets/',
         src: ['**/*'],
-        dest: 'public/assets/'
+        dest: 'dist/assets/'
       }
     },
     criticalcss: {  // Create above-the-fold CSS
       dev: {
         options: {
-          url: 'http://localhost:3000/default.html',
+          url: 'http://localhost:3000/index.html',
           width: 1200,
           height: 900,
-          outputfile: 'public/assets/css/sstar-above-the-fold.css',
-          filename: 'public/assets/css/sstar-main.min.css', // Using path.resolve( path.join( ... ) ) is a good idea here
+          outputfile: 'dist/assets/stylesheets/above-the-fold.css',
+          filename: 'dist/assets/stylesheets/main.min.css', // Using path.resolve( path.join( ... ) ) is a good idea here
           buffer: 800 * 1024,
           ignoreConsole: false
         }
       },
       prod: {
         options: {
-          url: 'http://localhost:3000',
+          url: 'http://localhost:3000/index.html',
           width: 1200,
           height: 900,
-          outputfile: 'public/assets/css/sstar-above-the-fold.css',
-          filename: 'public/assets/css/sstar-main.min.css', // Using path.resolve( path.join( ... ) ) is a good idea here
+          outputfile: 'dist/assets/stylesheets/above-the-fold.css',
+          filename: 'dist/assets/stylesheets/main.min.css', // Using path.resolve( path.join( ... ) ) is a good idea here
           buffer: 800 * 1024,
           ignoreConsole: false
         }
@@ -214,8 +214,8 @@ module.exports = function (grunt) {
       },
       subtask1: {
         files: {
-          'public/assets/css/sstar-main.min.css': 'public/assets/css/sstar-main.css',
-          'public/assets/css/sstar-web-fonts.min.css': 'public/assets/css/sstar-web-fonts.css',
+          'dist/assets/stylesheets/main.min.css': 'dist/assets/stylesheets/main.css',
+          'dist/assets/stylesheets/web-fonts.min.css': 'dist/assets/stylesheets/web-fonts.css',
         }
       },
       subtask2: {
@@ -223,12 +223,12 @@ module.exports = function (grunt) {
           safe: false
         },
         files: {
-          'public/assets/css/font-awesome.min.css': 'public/assets/css/font-awesome.css',
+          'dist/assets/stylesheets/font-awesome.min.css': 'dist/assets/stylesheets/font-awesome.css',
         }
       },
       subtask3: {
         files: {
-          'public/assets/css/sstar-above-the-fold.min.css': 'public/assets/css/sstar-above-the-fold.css',
+          'dist/assets/stylesheets/above-the-fold.min.css': 'dist/assets/stylesheets/above-the-fold.css',
         }
       }
     },
@@ -240,9 +240,9 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'public',
+          cwd: 'dist',
           src: ['**/*.html'],
-          dest: 'public'
+          dest: 'dist'
         }]
       },
       dist: {
@@ -252,27 +252,35 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'public',
+          cwd: 'dist',
           src: ['**/*.html'],
-          dest: 'public'
+          dest: 'dist'
         }]
       }
     },
     imagemin: { // Minify images
       dynamic: {
-        files: [{
-          expand: true,
-          cwd: 'images',
-          src: ['*.{png,jpg,gif,svg}'],
-          dest: 'public/assets/img/'
-        }]
+        files: [
+          {
+            expand: true,
+            cwd: 'src/assets/images',
+            src: ['*.{png,jpg,gif,svg}'],
+            dest: 'dist/assets/images'
+          },
+          {
+            expand: true,
+            cwd: 'src/assets/icons',
+            src: ['*.{ico,png,svg}'],
+            dest: 'dist'
+          }
+        ],
       }
     },
     postcss: {  // Postprocessing in CSS files
       options: {
         map: {
           inline: false, // save all sourcemaps as separate files...
-          annotation: 'public/assets/css/' // ...to the specified directory
+          annotation: 'dist/assets/stylesheets/' // ...to the specified directory
         },
         processors: [
           //require('pixrem')(), // add fallbacks for rem units
@@ -280,16 +288,16 @@ module.exports = function (grunt) {
         ]
       },
       dist: {
-        src: 'public/assets/css/*.css'
+        src: 'dist/assets/stylesheets/*.css'
       }
     },
     qunit: {
-      files: ['test/**/*.html']
+      files: ['src/test/**/*.html']
     },
     run: {
       server: { // Start http-server on port 3000
         cmd: 'node_modules\\.bin\\http-server.cmd',
-        args: ['-p 3000'],
+        args: ['-p 3000', './dist'],
         options: {
           passArgs: []
         }
@@ -302,9 +310,9 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'sass',
+          cwd: 'src/assets/stylesheets',
           src: '*.scss',
-          dest: 'public/assets/css',
+          dest: 'dist/assets/stylesheets',
           ext: '.min.css'
         }]
       },
@@ -315,9 +323,9 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'sass',
+          cwd: 'src/assets/stylesheets',
           src: '*.scss',
-          dest: 'public/assets/css',
+          dest: 'dist/assets/stylesheets',
           ext: '.css'
         }]
       }
@@ -330,28 +338,28 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'public/assets/js',
+          cwd: 'dist/assets/scripts',
           src: '**/*.js',
-          dest: 'public/assets/js',
+          dest: 'dist/assets/scripts',
           ext: '.min.js'
         }]
       }
     },
     watch: {
       imagemin: {
-        files: ['images/*.{png,jpg,gif,svg}'],
+        files: ['src/assets/images/*.{png,jpg,gif,svg}'],
         tasks: ['imagemin']
       },
       babel: {
-        files: ['js/**/*.js'],
+        files: ['src/assets/scripts/**/*.js'],
         tasks: ['babel:dev']
       },
       sass: {
-        files: ['sass/**/*.{scss,sass}', 'sass/_partials/**/*.{scss,sass}'],
+        files: ['src/assets/stylesheets/**/*.{scss,sass}', 'src/assets/stylesheets/_partials/**/*.{scss,sass}'],
         tasks: ['sass:dev', 'postcss']
       },
       handlebars: {
-        files: ['views/**/*.{hbs,handlebars}'],
+        files: ['./**/*.{hbs,handlebars}'],
         tasks: ['compile-handlebars:static', 'htmlmin:dev']
       }
     },
@@ -390,8 +398,6 @@ module.exports = function (grunt) {
       'postcss',                    // Perform postcss tasks on css files in public/assets/css
       'compile-handlebars:static',  // Compile handlebar files in the views folder to the public folder
       'htmlmin:dev',                // Minify all HTML files in the public folder
-      // 'criticalcss:dev',            // Create critical 'above-the-fold' css in public/assets/css
-      // 'cssnano:subtask3',           // Minify the above-the-fold css in public/assets/css
       'watch'                       // Watch for any changes and perform tasks when needed
     ]
   );

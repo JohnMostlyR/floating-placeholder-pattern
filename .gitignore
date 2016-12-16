@@ -5,16 +5,22 @@
 node_modules
 
 # SASS cache folder
-sass/.sass-cache
+src/assets/stylesheets/.sass-cache
 
 # Compiled CSS files
-public/assets/css/**
+dist/assets/stylesheets/**
 
 # Compiled JavaScript files
-public/assets/js/**
+dist/assets/scripts/**
 
 # Optimized images
-public/assets/img/**
+dist/assets/images/**
+dist/*.ico
+dist/*.png
+dist/*.svg
 
 # Compiled HTML files
-public/**/*.html
+dist/**/*.html
+
+# Security Sensitive Files
+/aws-keys.json
