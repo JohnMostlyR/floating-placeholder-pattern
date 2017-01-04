@@ -351,7 +351,7 @@ module.exports = function (grunt) {
         tasks: ['imagemin']
       },
       babel: {
-        files: ['src/assets/scripts/**/*.js'],
+        files: ['src/assets/scripts/**/*.js', '!src/assets/scripts/**/*scsslint_tmp*.js'],
         tasks: ['babel:dev']
       },
       sass: {
