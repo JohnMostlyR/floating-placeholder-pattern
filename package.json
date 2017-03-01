@@ -4,8 +4,7 @@
   "description": "New static web project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "http-server ./build -p 3000"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Johan Meester",
   "license": "ISC",
