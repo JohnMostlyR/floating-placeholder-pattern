@@ -1,12 +1,26 @@
 module.exports = function (grunt) {
+  require('jit-grunt')(grunt);
+
+  const path = require('path');
+
+  const sourceFolder = path.join(__dirname, 'src');
+  const buildFolder = path.join(__dirname, 'build');
+  const subFolder = {
+    images: path.join('assets', 'images'),
+    stylesheets: path.join('assets', 'stylesheets'),
+    scripts: path.join('assets', 'scripts')
+  };
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    aws: grunt.file.readJSON('aws-keys.json'), // Read the file
+
+    // Load AWS configuration
+    aws: grunt.file.readJSON('aws-keys.json'),
     aws_s3: { // https://github.com/MathieuLoutre/grunt-aws-s3
       options: {
         accessKeyId: '<%= aws.AWSAccessKeyId %>', // Use the variables
         secretAccessKey: '<%= aws.AWSSecretKey %>', // You can also use env variables
-        region: 'us-west-2',
+        region: '<%= aws.AWSRegion %>',
         uploadConcurrency: 5, // 5 simultaneous uploads
         downloadConcurrency: 5, // 5 simultaneous downloads
       },
@@ -29,13 +43,13 @@ module.exports = function (grunt) {
           },
           {
             expand: true,
-            cwd: 'dist/staging/scripts/',
+            cwd: 'build/staging/scripts/',
             src: ['**'],
             dest: 'app/scripts/'
           },
           {
             expand: true,
-            cwd: 'dist/staging/styles/',
+            cwd: 'build/staging/styles/',
             src: ['**'],
             dest: 'app/styles/'
           },
@@ -54,13 +68,13 @@ module.exports = function (grunt) {
         files: [
           {
             expand: true,
-            cwd: 'dist/',
+            cwd: 'build/',
             src: ['*'],
             dest: '/'
           },
           {
             expand: true,
-            cwd: 'dist/assets/',
+            cwd: 'build/assets/',
             src: ['**'],
             dest: 'assets/',
             params: {
@@ -128,94 +142,123 @@ module.exports = function (grunt) {
         ]
       }
     },
-    babel: {  // Compile ES6 to ES5
+
+    // Transpile ES6 to ES5
+    babel: {
       options: {
         sourceMap: true,
-        presets: ['es2015']
+        presets: ['babel-preset-es2015'],
+        plugins: ['babel-plugin-transform-runtime']
       },
       dev: {
         files: [{
           expand: true,
-          cwd: 'src/assets/scripts',
+          cwd: path.join(sourceFolder, subFolder.scripts),
           src: ['**/*.js'],
-          dest: 'dist/assets/scripts',
+          dest: path.join(buildFolder, subFolder.scripts),
           ext: '.min.js'
         }]
       },
-      dist: {
+      prod: {
         files: [{
           expand: true,
-          cwd: 'src/assets/scripts',
+          cwd: path.join(sourceFolder, subFolder.scripts),
           src: ['**/*.js'],
-          dest: 'dist/assets/scripts',
+          dest: path.join(buildFolder, subFolder.scripts),
           ext: '.min.js'
         }]
       }
     },
-    clean: {  // Clean folder(s) of left over files
-      css: ['dist/assets/stylesheets/**/*.css', '!dist/assets/stylesheets/**/*.min.css'],
-      js: ['dist/assets/scripts/**/*.js', '!dist/assets/scripts/**/*.min.js'],
-      allMap: ['dist/assets/**/*.map']
+
+    // Clean folder(s)
+    clean: {
+      preBuild: [path.join(buildFolder, '**'), `!${buildFolder}`],
+      postProduction: [
+        path.join(buildFolder, subFolder.stylesheets, '**', '*.css'),
+        `!${path.join(buildFolder, subFolder.stylesheets, '**', '*.min.css')}`,
+        path.join(buildFolder, subFolder.scripts, '**', '*.js'),
+        `!${path.join(buildFolder, subFolder.scripts, '**', '*.min.js')}`,
+        path.join(buildFolder, '**', '*.map')
+      ]
     },
-    'compile-handlebars': { // Compile handlebars files
+
+    // Compile handlebars
+    'compile-handlebars': {
       static: {
         files: [{
           expand: true,
-          cwd: 'src',
+          cwd: sourceFolder,
           src: '*.hbs',
-          dest: 'dist',
+          dest: buildFolder,
           ext: '.html'
         }],
-        helpers: '*.js',
+        //helpers: 'src/helpers/*.js',
         partials: 'src/partials/*.hbs',
         registerFullPath: true,
         templateData: 'src/data/en.json'
       },
     },
+
+    // Compress assets
     compress: {
       main: {
         options: {
           mode: 'gzip'
         },
         expand: true,
-        cwd: 'dist/assets/',
+        cwd: path.join(buildFolder, 'assets'),
         src: ['**/*'],
-        dest: 'dist/assets/'
+        dest: path.join(buildFolder, 'assets')
       }
     },
-    criticalcss: {  // Create above-the-fold CSS
-      dev: {
-        options: {
-          url: 'http://localhost:3000/index.html',
-          width: 1200,
-          height: 900,
-          outputfile: 'dist/assets/stylesheets/above-the-fold.css',
-          filename: 'dist/assets/stylesheets/main.min.css', // Using path.resolve( path.join( ... ) ) is a good idea here
-          buffer: 800 * 1024,
-          ignoreConsole: false
-        }
+
+    // Copy files and folders
+    copy: {
+      main: {
+        files: [
+
+          // includes files within path
+          {
+            expand: true,
+            cwd: sourceFolder,
+            src: ['browserconfig.xml', 'manifest.json'],
+            dest: buildFolder,
+            filter: 'isFile'
+          },
+        ],
       },
-      prod: {
-        options: {
-          url: 'http://localhost:3000/index.html',
-          width: 1200,
-          height: 900,
-          outputfile: 'dist/assets/stylesheets/above-the-fold.css',
-          filename: 'dist/assets/stylesheets/main.min.css', // Using path.resolve( path.join( ... ) ) is a good idea here
-          buffer: 800 * 1024,
-          ignoreConsole: false
-        }
+    },
+
+    // Extract and inline critical-path CSS to HTML
+    critical: {
+      options: {
+        base: path.join(buildFolder),
+        minify: true,
+        width: 1440,
+        height: 900,
+        ignore: [
+          '@font-face',
+          '@import'
+        ]
+      },
+      pages: {
+        expand: true,
+        cwd: path.join(buildFolder),
+        src: '{,**/}*.html',
+        dest: path.join(buildFolder),
       }
     },
-    cssnano: {  // Minify CSS files
+
+    // Minify CSS files
+    cssnano: {
       options: {
         sourcemap: false,
         safe: true
       },
       subtask1: {
         files: {
-          'dist/assets/stylesheets/main.min.css': 'dist/assets/stylesheets/main.css',
-          'dist/assets/stylesheets/web-fonts.min.css': 'dist/assets/stylesheets/web-fonts.css',
+          'build/assets/stylesheets/main.css': 'build/assets/stylesheets/main.css',
+          'build/assets/stylesheets/web-fonts.css': 'build/assets/stylesheets/web-fonts.css',
         }
       },
       subtask2: {
@@ -223,167 +266,187 @@ module.exports = function (grunt) {
           safe: false
         },
         files: {
-          'dist/assets/stylesheets/font-awesome.min.css': 'dist/assets/stylesheets/font-awesome.css',
+          'build/assets/stylesheets/font-awesome.min.css': 'build/assets/stylesheets/font-awesome.css',
         }
       },
       subtask3: {
         files: {
-          'dist/assets/stylesheets/above-the-fold.min.css': 'dist/assets/stylesheets/above-the-fold.css',
+          'build/assets/stylesheets/above-the-fold.min.css': 'build/assets/stylesheets/above-the-fold.css',
         }
       }
     },
-    htmlmin: {  // Minify HTML files
-      dev: {
+
+    // JavaScript linting
+    eslint: {
+      options: {},
+      target: ['**/*.js']
+    },
+
+    // Express web server
+    express: {
+      all: {
         options: {
-          removeComments: false,
-          collapseWhitespace: true
-        },
-        files: [{
-          expand: true,
-          cwd: 'dist',
-          src: ['**/*.html'],
-          dest: 'dist'
-        }]
+          port: 3000,
+          hostname: 'localhost',
+          bases: ['./build'],
+          livereload: true,
+        }
       },
-      dist: {
+    },
+
+    // Minify HTML files
+    htmlmin: {
+      prod: {
         options: {
           removeComments: true,
           collapseWhitespace: true
         },
         files: [{
           expand: true,
-          cwd: 'dist',
-          src: ['**/*.html'],
-          dest: 'dist'
+          cwd: buildFolder,
+          src: ['*.html'],
+          dest: buildFolder
         }]
       }
     },
-    imagemin: { // Minify images
+
+    // Minify images
+    imagemin: {
       dynamic: {
         files: [
           {
             expand: true,
-            cwd: 'src/assets/images',
+            cwd: path.join(sourceFolder, subFolder.images),
             src: ['*.{png,jpg,gif,svg}'],
-            dest: 'dist/assets/images'
+            dest: path.join(buildFolder, subFolder.images)
           },
           {
             expand: true,
-            cwd: 'src/assets/icons',
+            cwd: path.join(sourceFolder, 'assets', 'icons'),
             src: ['*.{ico,png,svg}'],
-            dest: 'dist'
+            dest: buildFolder
           }
         ],
       }
     },
-    postcss: {  // Postprocessing in CSS files
+
+    // Postprocessing for CSS files
+    postcss: {
       options: {
         map: {
           inline: false, // save all sourcemaps as separate files...
-          annotation: 'dist/assets/stylesheets/' // ...to the specified directory
+          annotation: path.join(buildFolder, subFolder.stylesheets), // ...to the specified directory
         },
         processors: [
           //require('pixrem')(), // add fallbacks for rem units
-          require('autoprefixer')({browsers: ['last 2 versions']}), // add vendor prefixes
+          require('autoprefixer'), // add vendor prefixes
         ]
       },
       dist: {
-        src: 'dist/assets/stylesheets/*.css'
+        src: path.join(buildFolder, subFolder.stylesheets, '*.css')
       }
     },
-    qunit: {
-      files: ['src/test/**/*.html']
+
+    // Purify CSS
+    purifycss: {
+      options: {
+        minify: false,
+        rejected: true, // Logs out removed selectors.
+        whitelist: [],  // Array of selectors to always leave in.
+      },
+      target: {
+        src: [
+          path.join(buildFolder, '*.html'),
+          path.join(buildFolder, subFolder.scripts, '**', '*.js')
+        ],
+        css: [path.join(buildFolder, subFolder.stylesheets, '**', 'main.css')],
+        dest: path.join(buildFolder, subFolder.stylesheets, 'main.css')
+      },
     },
-    run: {
-      server: { // Start http-server on port 3000
-        cmd: 'node_modules\\.bin\\http-server.cmd',
-        args: ['-p 3000', './dist'],
-        options: {
-          passArgs: []
-        }
-      }
-    },
-    sass: { // Compile SASS files
+
+    // Compile SASS files
+    sass: {
       dev: {
         options: {
           sourceMap: true
         },
         files: [{
           expand: true,
-          cwd: 'src/assets/stylesheets',
-          src: '*.scss',
-          dest: 'dist/assets/stylesheets',
-          ext: '.min.css'
+          cwd: path.join(sourceFolder, subFolder.stylesheets),
+          src: '*.{scss, sass}',
+          dest: path.join(buildFolder, subFolder.stylesheets),
+          ext: '.css'
         }]
       },
-      dist: {
+      prod: {
         options: {
           sourceMap: false,
-          outputStyle: 'compressed'
         },
         files: [{
           expand: true,
-          cwd: 'src/assets/stylesheets',
-          src: '*.scss',
-          dest: 'dist/assets/stylesheets',
+          cwd: path.join(sourceFolder, subFolder.stylesheets),
+          src: '*.{scss, sass}',
+          dest: path.join(buildFolder, subFolder.stylesheets),
           ext: '.css'
         }]
       }
     },
-    uglify: { // Minify JavaScript files
-      dist: {
+
+    // Minify JavaScript files
+    uglify: {
+      prod: {
         options: {
           sourceMap: false,
           preserveComments: 'some'
         },
         files: [{
           expand: true,
-          cwd: 'dist/assets/scripts',
+          cwd: path.join(buildFolder, subFolder.scripts),
           src: '**/*.js',
-          dest: 'dist/assets/scripts',
+          dest: path.join(buildFolder, subFolder.scripts),
           ext: '.min.js'
         }]
       }
     },
+
+    // Watch for changes
     watch: {
+      options: {
+        livereload: true,
+      },
       imagemin: {
-        files: ['src/assets/images/*.{png,jpg,gif,svg}'],
-        tasks: ['imagemin']
+        files: [path.join(sourceFolder, subFolder.images, '**', '*.{png,jpg,gif,svg}')],
+        tasks: ['imagemin'],
       },
       babel: {
-        files: ['src/assets/scripts/**/*.js', '!src/assets/scripts/**/*scsslint_tmp*.js'],
-        tasks: ['babel:dev']
+        files: [
+          path.join(sourceFolder, subFolder.scripts, '**', '*.js'),
+          `!${path.join(sourceFolder, subFolder.scripts, '**', '*lint_tmp*.js')}`
+        ],
+        tasks: ['babel:dev'],
       },
+      files: ['./build/**'],
+      tasks: [],
       sass: {
-        files: ['src/assets/stylesheets/**/*.{scss,sass}', 'src/assets/stylesheets/_partials/**/*.{scss,sass}'],
-        tasks: ['sass:dev', 'postcss']
+        files: [
+          path.join(sourceFolder, subFolder.stylesheets, '**', '*.{scss, sass}')
+        ],
+        tasks: [
+          'sass:dev',
+          'purifycss',
+          'postcss'
+        ],
       },
       handlebars: {
-        files: ['./**/*.{hbs,handlebars}'],
-        tasks: ['compile-handlebars:static', 'htmlmin:dev']
-      }
+        files: [
+          path.join(sourceFolder, '*.{hbs,handlebars}'),
+          path.join(sourceFolder, '**', '*.{hbs,handlebars}')
+        ],
+        tasks: [
+          'compile-handlebars:static'
+        ],
+      },
     },
-  });
-
-  // Load plugins
-  [
-    'grunt-run',
-    'grunt-babel',
-    'grunt-contrib-uglify',
-    'grunt-contrib-watch',
-    'grunt-sass',
-    'grunt-compile-handlebars',
-    'grunt-contrib-htmlmin',
-    'grunt-postcss',
-    'grunt-criticalcss',
-    'grunt-cssnano-plus',
-    'grunt-contrib-clean',
-    'grunt-contrib-imagemin',
-    'grunt-newer',
-    'grunt-contrib-compress',
-    'grunt-aws-s3'
-  ].forEach(function (task) {
-    grunt.loadNpmTasks(task);
   });
 
   // Register tasks
@@ -392,12 +455,15 @@ module.exports = function (grunt) {
   grunt.registerTask(
     'dev',
     [
-      'newer:imagemin',             // Minify images in the images folder and copy to public/assets/img
-      'babel:dev',                  // Compile ES6 to ES5 in the js folder and copy to public/assets/js
-      'sass:dev',                   // Compile SASS to CSS in the sass folder and copy to public/assets/css
-      'postcss',                    // Perform postcss tasks on css files in public/assets/css
-      'compile-handlebars:static',  // Compile handlebar files in the views folder to the public folder
-      'htmlmin:dev',                // Minify all HTML files in the public folder
+      'clean:preBuild',             // Clean build folders
+      'copy:main',                  // Copy some files and folders
+      'imagemin',                   // Minify images
+      'babel:dev',                  // Transpile ES6 to ES5
+      'sass:dev',                   // Compile SASS to CSS
+      'compile-handlebars:static',  // Compile handlebar templates
+      'purifycss',                  // Remove unused style selectors from CSS files
+      'postcss',                    // Perform PostCSS tasks on CSS files
+      'express',                    // Start web server
       'watch'                       // Watch for any changes and perform tasks when needed
     ]
   );
@@ -406,18 +472,20 @@ module.exports = function (grunt) {
   grunt.registerTask(
     'default',
     [
-      'imagemin',                   // Minify images in the images folder and copy to public/assets/img
-      'babel:dist',                 // Compile ES6 to ES5 in the js folder and copy to public/assets/js
-      'uglify:dist',                // Minify all JavaScript in the public/assets/js folder
-      'sass:dist',                  // Compile SASS to CSS in the sass folder and copy to public/assets/css
-      'postcss',                    // Perform postcss tasks on css files in public/assets/css
-      'cssnano:subtask1',           // Minify css in public/assets/css
-      'cssnano:subtask2',           // Minify css in public/assets/css with the 'safe' option set to 'false'
-      'compile-handlebars:static',  // Compile handlebar files in the views folder to the public folder
-      'htmlmin:dist',               // Minify all HTML files in the public folder
-      'criticalcss:prod',           // Create critical 'above-the-fold' css in public/assets/css
-      'cssnano:subtask3',           // Minify the above-the-fold css in public/assets/css
-      'clean'                       // Clean folder(s) of left over files
+      'clean:preBuild',             // Clean build folders
+      'copy:main',                  // Copy some files and folders
+      'imagemin',                   // Minify images
+      'babel:prod',                 // Transpile ES6 to ES5
+      'uglify:prod',                // Minify all JavaScript
+      'sass:prod',                  // Compile SASS to CSS
+      'compile-handlebars:static',  // Compile handlebar files
+      'purifycss',                  // Remove unused style selectors from CSS files
+      'postcss',                    // Perform PostCSS tasks on css files
+      'cssnano:subtask1',           // Minify CSS with the 'safe' option
+      'cssnano:subtask2',           // Minify CSS
+      'critical',                   // Extract and inline critical-path CSS to HTML
+      'htmlmin:prod',               // Minify all HTML files
+      'clean:postProduction'        // Clean folder(s) of left over files
     ]
   );
 
@@ -432,11 +500,9 @@ module.exports = function (grunt) {
 
   // Download from S3
   grunt.registerTask(
-    'download',
+    'backup',
     [
       'aws_s3:download_production'
     ]
   );
-
-  //  Run server with "grunt run:server"
 };

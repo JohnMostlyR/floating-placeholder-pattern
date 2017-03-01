@@ -1,6 +1,6 @@
 p {
   @include base-font-regular();
-  margin: 0 0 0 inuit-rem(14px);
+  margin: 0 0 0 14px;
 
   &:first-child {
     margin-top: 0;
