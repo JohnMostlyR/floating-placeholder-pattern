@@ -8,139 +8,91 @@ module.exports = function (grunt) {
   const subFolder = {
     images: path.join('assets', 'images'),
     stylesheets: path.join('assets', 'stylesheets'),
-    scripts: path.join('assets', 'scripts')
+    scripts: path.join('assets', 'scripts'),
   };
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-    // Load AWS configuration
-    aws: grunt.file.readJSON('aws-keys.json'),
-    aws_s3: { // https://github.com/MathieuLoutre/grunt-aws-s3
+    // Load configuration
+    cfg: grunt.file.readJSON('config.json'),
+
+    aws_s3: {
       options: {
-        accessKeyId: '<%= aws.AWSAccessKeyId %>', // Use the variables
-        secretAccessKey: '<%= aws.AWSSecretKey %>', // You can also use env variables
-        region: '<%= aws.AWSRegion %>',
+        accessKeyId: '<%= cfg.aws.AWSAccessKeyId %>', // Use the variables
+        secretAccessKey: '<%= cfg.aws.AWSSecretKey %>', // You can also use env variables
+        region: '<%= cfg.aws.AWSRegion %>',
         uploadConcurrency: 5, // 5 simultaneous uploads
         downloadConcurrency: 5, // 5 simultaneous downloads
       },
-      staging: {
-        options: {
-          bucket: 'my-wonderful-staging-bucket',
-          differential: true, // Only uploads the files that have changed
-          gzipRename: 'ext' // when uploading a gz file, keep the original extension
-        },
-        files: [
-          {
-            dest: 'app/',
-            cwd: 'backup/staging/',
-            action: 'download'
-          },
-          {
-            src: 'app/',
-            cwd: 'copy/',
-            action: 'copy'
-          },
-          {
-            expand: true,
-            cwd: 'build/staging/scripts/',
-            src: ['**'],
-            dest: 'app/scripts/'
-          },
-          {
-            expand: true,
-            cwd: 'build/staging/styles/',
-            src: ['**'],
-            dest: 'app/styles/'
-          },
-          {
-            dest: 'src/app',
-            action: 'delete'
-          },
-        ]
-      },
       production: {
         options: {
-          bucket: 'my-wonderful-production-bucket',
+          bucket: '<%= cfg.aws.s3.production.bucket %>',
           differential: true, // Only uploads the files that have changed
           gzipRename: 'ext', // when uploading a gz file, keep the original extension
         },
         files: [
           {
             expand: true,
-            cwd: 'build/',
+            cwd: buildFolder,
             src: ['*'],
-            dest: '/'
+            dest: '/',
           },
           {
             expand: true,
-            cwd: 'build/assets/',
+            cwd: path.join(buildFolder, 'assets'),
             src: ['**'],
             dest: 'assets/',
             params: {
               CacheControl: '2000',
-              ContentEncoding: 'gzip'
-            }
+              ContentEncoding: 'gzip',
+            },
           },
           // CacheControl only applied to the assets folder
           // LICENCE inside that folder will have ContentType equal to 'text/plain'
-        ]
+        ],
       },
       clean_production: {
         options: {
-          bucket: 'my-wonderful-production-bucket',
-          debug: true // Doesn't actually delete but shows log
+          bucket: '<%= cfg.aws.s3.production.bucket %>',
+          debug: true, // Doesn't actually delete but shows log
         },
         files: [
           {
             dest: '/',
-            action: 'delete'
+            action: 'delete',
           },
           {
             dest: 'assets/',
             exclude: '**/*.tgz',
-            action: 'delete'
+            action: 'delete',
           }, // will not delete the tgz
           {
             dest: 'assets/large/',
             exclude: '**/*copy*',
             flipExclude: true,
-            action: 'delete'
+            action: 'delete',
           }, // will delete everything that has copy in the name
-        ]
+        ],
       },
       download_production: {
         options: {
-          bucket: 'my-wonderful-production-bucket'
+          bucket: '<%= cfg.aws.s3.production.bucket %>',
         },
         files: [
           {
             dest: '/',
             cwd: 'backup/',
-            action: 'download'
+            action: 'download',
           }, // Downloads the content of app/ to backup/
           {
             dest: 'assets/',
-            cwd: 'backup/assets/',
+            cwd: 'backup-assets/',
             exclude: '**/*copy*',
-            action: 'download'
+            action: 'download',
           }, // Downloads everything which doesn't have copy in the name
-        ]
+        ],
       },
-      secret: {
-        options: {
-          bucket: 'my-wonderful-private-bucket',
-          access: 'private'
-        },
-        files: [
-          {
-            expand: true,
-            cwd: 'secret_garden/',
-            src: ['*.key'],
-            dest: 'secret/'
-          },
-        ]
-      }
     },
 
     // Transpile ES6 to ES5
@@ -148,7 +100,7 @@ module.exports = function (grunt) {
       options: {
         sourceMap: true,
         presets: ['babel-preset-es2015'],
-        plugins: ['babel-plugin-transform-runtime']
+        // plugins: ['babel-plugin-transform-runtime'],
       },
       dev: {
         files: [{
@@ -156,8 +108,8 @@ module.exports = function (grunt) {
           cwd: path.join(sourceFolder, subFolder.scripts),
           src: ['**/*.js'],
           dest: path.join(buildFolder, subFolder.scripts),
-          ext: '.min.js'
-        }]
+          ext: '.js',
+        }],
       },
       prod: {
         files: [{
@@ -165,37 +117,33 @@ module.exports = function (grunt) {
           cwd: path.join(sourceFolder, subFolder.scripts),
           src: ['**/*.js'],
           dest: path.join(buildFolder, subFolder.scripts),
-          ext: '.min.js'
-        }]
-      }
+          ext: '.js',
+        }],
+      },
     },
 
     // Clean folder(s)
     clean: {
       preBuild: [path.join(buildFolder, '**'), `!${buildFolder}`],
       postProduction: [
-        path.join(buildFolder, subFolder.stylesheets, '**', '*.css'),
-        `!${path.join(buildFolder, subFolder.stylesheets, '**', '*.min.css')}`,
-        path.join(buildFolder, subFolder.scripts, '**', '*.js'),
-        `!${path.join(buildFolder, subFolder.scripts, '**', '*.min.js')}`,
-        path.join(buildFolder, '**', '*.map')
-      ]
+        path.join(buildFolder, '**', '*.map'),
+      ],
     },
 
     // Compile handlebars
     'compile-handlebars': {
-      static: {
+      globbedTemplateAndOutput: {
         files: [{
           expand: true,
           cwd: sourceFolder,
           src: '*.hbs',
           dest: buildFolder,
-          ext: '.html'
+          ext: '.html',
         }],
-        //helpers: 'src/helpers/*.js',
+        helpers: 'src/helpers/*.js',
         partials: 'src/partials/*.hbs',
         registerFullPath: true,
-        templateData: 'src/data/en.json'
+        templateData: 'src/data/en.json',
       },
     },
 
@@ -203,13 +151,13 @@ module.exports = function (grunt) {
     compress: {
       main: {
         options: {
-          mode: 'gzip'
+          mode: 'gzip',
         },
         expand: true,
         cwd: path.join(buildFolder, 'assets'),
         src: ['**/*'],
-        dest: path.join(buildFolder, 'assets')
-      }
+        dest: path.join(buildFolder, 'assets'),
+      },
     },
 
     // Copy files and folders
@@ -223,7 +171,13 @@ module.exports = function (grunt) {
             cwd: sourceFolder,
             src: ['browserconfig.xml', 'manifest.json'],
             dest: buildFolder,
-            filter: 'isFile'
+            filter: 'isFile',
+          },
+          {
+            expand: true,
+            cwd: path.join(sourceFolder, subFolder.scripts, 'translations'),
+            src: ['**/*'],
+            dest: path.join(buildFolder, subFolder.scripts, 'translations'),
           },
         ],
       },
@@ -238,48 +192,50 @@ module.exports = function (grunt) {
         height: 900,
         ignore: [
           '@font-face',
-          '@import'
-        ]
+          '@import',
+        ],
       },
       pages: {
         expand: true,
         cwd: path.join(buildFolder),
         src: '{,**/}*.html',
         dest: path.join(buildFolder),
-      }
+      },
     },
 
     // Minify CSS files
     cssnano: {
       options: {
         sourcemap: false,
-        safe: true
+        safe: true,
       },
       subtask1: {
         files: {
           'build/assets/stylesheets/main.css': 'build/assets/stylesheets/main.css',
+          'build/assets/stylesheets/landing.css': 'build/assets/stylesheets/landing.css',
+          'build/assets/stylesheets/landing-critical.css': 'build/assets/stylesheets/landing-critical.css',
           'build/assets/stylesheets/web-fonts.css': 'build/assets/stylesheets/web-fonts.css',
-        }
+          'build/assets/stylesheets/cookie-message.css': 'build/assets/stylesheets/cookie-message.css',
+        },
       },
       subtask2: {
         options: {
-          safe: false
+          safe: false,
         },
         files: {
-          'build/assets/stylesheets/font-awesome.min.css': 'build/assets/stylesheets/font-awesome.css',
-        }
+          'build/assets/stylesheets/font-awesome.css': 'build/assets/stylesheets/font-awesome.css',
+        },
       },
-      subtask3: {
-        files: {
-          'build/assets/stylesheets/above-the-fold.min.css': 'build/assets/stylesheets/above-the-fold.css',
-        }
-      }
     },
 
     // JavaScript linting
     eslint: {
-      options: {},
-      target: ['**/*.js']
+      options: {
+        quiet: true,
+        // configFile: '',
+        // rulePaths: [],
+      },
+      target: ['**/*.js'],
     },
 
     // Express web server
@@ -290,7 +246,7 @@ module.exports = function (grunt) {
           hostname: 'localhost',
           bases: ['./build'],
           livereload: true,
-        }
+        },
       },
     },
 
@@ -299,15 +255,15 @@ module.exports = function (grunt) {
       prod: {
         options: {
           removeComments: true,
-          collapseWhitespace: true
+          collapseWhitespace: true,
         },
         files: [{
           expand: true,
           cwd: buildFolder,
           src: ['*.html'],
-          dest: buildFolder
-        }]
-      }
+          dest: buildFolder,
+        }],
+      },
     },
 
     // Minify images
@@ -318,33 +274,41 @@ module.exports = function (grunt) {
             expand: true,
             cwd: path.join(sourceFolder, subFolder.images),
             src: ['*.{png,jpg,gif,svg}'],
-            dest: path.join(buildFolder, subFolder.images)
+            dest: path.join(buildFolder, subFolder.images),
           },
           {
             expand: true,
             cwd: path.join(sourceFolder, 'assets', 'icons'),
             src: ['*.{ico,png,svg}'],
-            dest: buildFolder
-          }
+            dest: buildFolder,
+          },
         ],
-      }
+      },
     },
 
     // Postprocessing for CSS files
     postcss: {
       options: {
-        map: {
-          inline: false, // save all sourcemaps as separate files...
-          annotation: path.join(buildFolder, subFolder.stylesheets), // ...to the specified directory
-        },
         processors: [
-          //require('pixrem')(), // add fallbacks for rem units
+          // require('pixrem')(), // add fallbacks for rem units
           require('autoprefixer'), // add vendor prefixes
-        ]
+        ],
       },
-      dist: {
-        src: path.join(buildFolder, subFolder.stylesheets, '*.css')
-      }
+      dev: {
+        options: {
+          map: {
+            inline: false, // save all sourcemaps as separate files...
+            annotation: path.join(buildFolder, subFolder.stylesheets), // ...to the specified directory
+          },
+        },
+        src: path.join(buildFolder, subFolder.stylesheets, '*.css'),
+      },
+      prod: {
+        options: {
+          map: false,
+        },
+        src: path.join(buildFolder, subFolder.stylesheets, '*.css'),
+      },
     },
 
     // Purify CSS
@@ -352,15 +316,19 @@ module.exports = function (grunt) {
       options: {
         minify: false,
         rejected: true, // Logs out removed selectors.
-        whitelist: [],  // Array of selectors to always leave in.
+
+        // Array of selectors to always leave in.
+        whitelist: [
+          '.pac-container', // Google geocode pick list selector
+        ],
       },
       target: {
         src: [
           path.join(buildFolder, '*.html'),
-          path.join(buildFolder, subFolder.scripts, '**', '*.js')
+          path.join(buildFolder, subFolder.scripts, '**', '*.js'),
         ],
-        css: [path.join(buildFolder, subFolder.stylesheets, '**', 'main.css')],
-        dest: path.join(buildFolder, subFolder.stylesheets, 'main.css')
+        css: [path.join(buildFolder, subFolder.stylesheets, '**', 'sstar-main.css')],
+        dest: path.join(buildFolder, subFolder.stylesheets, 'sstar-main.css'),
       },
     },
 
@@ -368,15 +336,15 @@ module.exports = function (grunt) {
     sass: {
       dev: {
         options: {
-          sourceMap: true
+          sourceMap: true,
         },
         files: [{
           expand: true,
           cwd: path.join(sourceFolder, subFolder.stylesheets),
           src: '*.{scss, sass}',
           dest: path.join(buildFolder, subFolder.stylesheets),
-          ext: '.css'
-        }]
+          ext: '.css',
+        }],
       },
       prod: {
         options: {
@@ -387,9 +355,9 @@ module.exports = function (grunt) {
           cwd: path.join(sourceFolder, subFolder.stylesheets),
           src: '*.{scss, sass}',
           dest: path.join(buildFolder, subFolder.stylesheets),
-          ext: '.css'
-        }]
-      }
+          ext: '.css',
+        }],
+      },
     },
 
     // Minify JavaScript files
@@ -397,16 +365,18 @@ module.exports = function (grunt) {
       prod: {
         options: {
           sourceMap: false,
-          preserveComments: 'some'
+          mangle: { screw_ie8: true },
+          compress: { screw_ie8: true, warnings: false },
+          comments: false,
         },
         files: [{
           expand: true,
           cwd: path.join(buildFolder, subFolder.scripts),
           src: '**/*.js',
           dest: path.join(buildFolder, subFolder.scripts),
-          ext: '.min.js'
-        }]
-      }
+          ext: '.js',
+        }],
+      },
     },
 
     // Watch for changes
@@ -415,35 +385,35 @@ module.exports = function (grunt) {
         livereload: true,
       },
       imagemin: {
-        files: [path.join(sourceFolder, subFolder.images, '**', '*.{png,jpg,gif,svg}')],
+        files: [path.join(sourceFolder, subFolder.images, '*.{png,jpg,gif,svg}')],
         tasks: ['imagemin'],
       },
       babel: {
         files: [
           path.join(sourceFolder, subFolder.scripts, '**', '*.js'),
-          `!${path.join(sourceFolder, subFolder.scripts, '**', '*lint_tmp*.js')}`
+          `!${path.join(sourceFolder, subFolder.scripts, '**', '*lint_tmp*.js')}`,
         ],
-        tasks: ['babel:dev'],
+        tasks: ['eslint', 'babel:dev'],
       },
       files: ['./build/**'],
       tasks: [],
       sass: {
         files: [
-          path.join(sourceFolder, subFolder.stylesheets, '**', '*.{scss, sass}')
+          path.join(sourceFolder, subFolder.stylesheets, '**', '*.{scss, sass}'),
         ],
         tasks: [
           'sass:dev',
           'purifycss',
-          'postcss'
+          'postcss',
         ],
       },
       handlebars: {
         files: [
           path.join(sourceFolder, '*.{hbs,handlebars}'),
-          path.join(sourceFolder, '**', '*.{hbs,handlebars}')
+          path.join(sourceFolder, '**', '*.{hbs,handlebars}'),
         ],
         tasks: [
-          'compile-handlebars:static'
+          'compile-handlebars:globbedTemplateAndOutput',
         ],
       },
     },
@@ -458,19 +428,20 @@ module.exports = function (grunt) {
       'clean:preBuild',             // Clean build folders
       'copy:main',                  // Copy some files and folders
       'imagemin',                   // Minify images
+      'eslint',
       'babel:dev',                  // Transpile ES6 to ES5
       'sass:dev',                   // Compile SASS to CSS
-      'compile-handlebars:static',  // Compile handlebar templates
+      'compile-handlebars:globbedTemplateAndOutput',  // Compile handlebar templates
       'purifycss',                  // Remove unused style selectors from CSS files
-      'postcss',                    // Perform PostCSS tasks on CSS files
+      'postcss:dev',                // Perform PostCSS tasks on CSS files
       'express',                    // Start web server
-      'watch'                       // Watch for any changes and perform tasks when needed
+      'watch',                      // Watch for any changes and perform tasks when needed
     ]
   );
 
   // the default task can be run just by typing "grunt" on the command line
   grunt.registerTask(
-    'default',
+    'prod',
     [
       'clean:preBuild',             // Clean build folders
       'copy:main',                  // Copy some files and folders
@@ -478,14 +449,14 @@ module.exports = function (grunt) {
       'babel:prod',                 // Transpile ES6 to ES5
       'uglify:prod',                // Minify all JavaScript
       'sass:prod',                  // Compile SASS to CSS
-      'compile-handlebars:static',  // Compile handlebar files
+      'compile-handlebars:globbedTemplateAndOutput',  // Compile handlebar files
       'purifycss',                  // Remove unused style selectors from CSS files
-      'postcss',                    // Perform PostCSS tasks on css files
+      'postcss:prod',               // Perform PostCSS tasks on css files
       'cssnano:subtask1',           // Minify CSS with the 'safe' option
       'cssnano:subtask2',           // Minify CSS
       'critical',                   // Extract and inline critical-path CSS to HTML
       'htmlmin:prod',               // Minify all HTML files
-      'clean:postProduction'        // Clean folder(s) of left over files
+      'clean:postProduction',       // Clean folder(s) of left over files
     ]
   );
 
@@ -494,15 +465,15 @@ module.exports = function (grunt) {
     'publish',
     [
       'compress',
-      'aws_s3:production'
+      'aws_s3:production',
     ]
   );
 
   // Download from S3
   grunt.registerTask(
-    'backup',
+    'download',
     [
-      'aws_s3:download_production'
+      'aws_s3:download_production',
     ]
   );
 };

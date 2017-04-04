@@ -10,5 +10,5 @@ node_modules
 /build/**
 
 # Security Sensitive Files
-/aws-keys.json
 /ssh/**
+!/config.json
