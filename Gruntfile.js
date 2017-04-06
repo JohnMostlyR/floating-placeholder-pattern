@@ -327,8 +327,8 @@ module.exports = function (grunt) {
           path.join(buildFolder, '*.html'),
           path.join(buildFolder, subFolder.scripts, '**', '*.js'),
         ],
-        css: [path.join(buildFolder, subFolder.stylesheets, '**', 'sstar-main.css')],
-        dest: path.join(buildFolder, subFolder.stylesheets, 'sstar-main.css'),
+        css: [path.join(buildFolder, subFolder.stylesheets, '**', 'main.css')],
+        dest: path.join(buildFolder, subFolder.stylesheets, 'main.css'),
       },
     },
 
@@ -428,7 +428,6 @@ module.exports = function (grunt) {
       'clean:preBuild',             // Clean build folders
       'copy:main',                  // Copy some files and folders
       'imagemin',                   // Minify images
-      'eslint',
       'babel:dev',                  // Transpile ES6 to ES5
       'sass:dev',                   // Compile SASS to CSS
       'compile-handlebars:globbedTemplateAndOutput',  // Compile handlebar templates
@@ -446,6 +445,7 @@ module.exports = function (grunt) {
       'clean:preBuild',             // Clean build folders
       'copy:main',                  // Copy some files and folders
       'imagemin',                   // Minify images
+      'eslint',						// Check JavaScript code style
       'babel:prod',                 // Transpile ES6 to ES5
       'uglify:prod',                // Minify all JavaScript
       'sass:prod',                  // Compile SASS to CSS
