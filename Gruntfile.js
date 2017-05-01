@@ -131,6 +131,7 @@ module.exports = function (grunt) {
     },
 
     // Compile handlebars
+    // uncomment 'helpers' when you have helpers defined
     'compile-handlebars': {
       globbedTemplateAndOutput: {
         files: [{
@@ -140,7 +141,7 @@ module.exports = function (grunt) {
           dest: buildFolder,
           ext: '.html',
         }],
-        helpers: 'src/helpers/*.js',
+        // helpers: 'src/helpers/*.js',
         partials: 'src/partials/*.hbs',
         registerFullPath: true,
         templateData: 'src/data/en.json',
@@ -393,7 +394,7 @@ module.exports = function (grunt) {
           path.join(sourceFolder, subFolder.scripts, '**', '*.js'),
           `!${path.join(sourceFolder, subFolder.scripts, '**', '*lint_tmp*.js')}`,
         ],
-        tasks: ['eslint', 'babel:dev'],
+        tasks: ['babel:dev'],
       },
       files: ['./build/**'],
       tasks: [],
@@ -445,7 +446,7 @@ module.exports = function (grunt) {
       'clean:preBuild',             // Clean build folders
       'copy:main',                  // Copy some files and folders
       'imagemin',                   // Minify images
-      'eslint',						// Check JavaScript code style
+      'eslint',                     // Check JavaScript code style
       'babel:prod',                 // Transpile ES6 to ES5
       'uglify:prod',                // Minify all JavaScript
       'sass:prod',                  // Compile SASS to CSS
