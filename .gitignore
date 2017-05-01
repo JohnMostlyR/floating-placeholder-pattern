@@ -11,4 +11,4 @@ node_modules
 
 # Security Sensitive Files
 /ssh/**
-!/config.json
+/config.json
