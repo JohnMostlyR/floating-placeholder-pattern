@@ -161,6 +161,18 @@ module.exports = function (grunt) {
       },
     },
 
+    // Start a connect web server
+    connect: {
+      server: {
+        options: {
+          port: 3000,
+          hostname: 'localhost',
+          base: './build',
+          livereload: true,
+        },
+      },
+    },
+
     // Copy files and folders
     copy: {
       main: {
@@ -237,18 +249,6 @@ module.exports = function (grunt) {
         // rulePaths: [],
       },
       target: ['**/*.js'],
-    },
-
-    // Express web server
-    express: {
-      all: {
-        options: {
-          port: 3000,
-          hostname: 'localhost',
-          bases: ['./build'],
-          livereload: true,
-        },
-      },
     },
 
     // Minify HTML files
@@ -366,8 +366,13 @@ module.exports = function (grunt) {
       prod: {
         options: {
           sourceMap: false,
-          mangle: { screw_ie8: true },
-          compress: { screw_ie8: true, warnings: false },
+          mangle: {
+            screw_ie8: true
+          },
+          compress: {
+            screw_ie8: true,
+            warnings: false
+          },
           comments: false,
         },
         files: [{
@@ -382,8 +387,12 @@ module.exports = function (grunt) {
 
     // Watch for changes
     watch: {
-      options: {
-        livereload: true,
+      livereload: {
+        options: {
+          livereload: true,
+        },
+        files: ['./build/**'],
+        tasks: [],
       },
       imagemin: {
         files: [path.join(sourceFolder, subFolder.images, '*.{png,jpg,gif,svg}')],
@@ -396,22 +405,19 @@ module.exports = function (grunt) {
         ],
         tasks: ['babel:dev'],
       },
-      files: ['./build/**'],
-      tasks: [],
       sass: {
         files: [
           path.join(sourceFolder, subFolder.stylesheets, '**', '*.{scss, sass}'),
         ],
         tasks: [
           'sass:dev',
-          'purifycss',
           'postcss',
         ],
       },
       handlebars: {
         files: [
           path.join(sourceFolder, '*.{hbs,handlebars}'),
-          path.join(sourceFolder, '**', '*.{hbs,handlebars}'),
+          path.join(sourceFolder, 'partials', '**', '*.{hbs,handlebars}'),
         ],
         tasks: [
           'compile-handlebars:globbedTemplateAndOutput',
@@ -432,9 +438,8 @@ module.exports = function (grunt) {
       'babel:dev',                  // Transpile ES6 to ES5
       'sass:dev',                   // Compile SASS to CSS
       'compile-handlebars:globbedTemplateAndOutput',  // Compile handlebar templates
-      'purifycss',                  // Remove unused style selectors from CSS files
       'postcss:dev',                // Perform PostCSS tasks on CSS files
-      'express',                    // Start web server
+      'connect',                    // Start web server
       'watch',                      // Watch for any changes and perform tasks when needed
     ]
   );
