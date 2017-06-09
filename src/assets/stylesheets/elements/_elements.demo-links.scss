@@ -1,0 +1,14 @@
+a,
+a:visited {
+  font-weight: bold;
+  text-decoration: underline;
+  color: $gel-color--tundora;
+  transition: color 0.2s ease-out;
+}
+
+a:focus,
+a:hover,
+a:active {
+  text-decoration: underline;
+  color: $gel-color--orange;
+}

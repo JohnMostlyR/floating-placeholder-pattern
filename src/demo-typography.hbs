@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html class="b-pw-1280" lang="en" dir="ltr">
+<head>
+  {{> src/partials/_demo-page-head title='Typography Demo' }}
+</head>
+<body>
+<div class="demo">
+
+  {{!-- HEADER --}}
+  {{> src/partials/_demo-typography-header }}
+
+  {{!-- CONTENT --}}
+  {{> src/partials/_demo-typography-main-content }}
+</div>
+
+{{!-- JAVASCRIPT --}}
+<script>
+  (function () {
+    if (document.getElementsByTagName('html')[0].classList.contains('touch')) {
+      var touchToggle = document.getElementById('touch-toggle');
+      touchToggle.innerHTML = 'Toggle Touch On';
+      touchToggle.addEventListener('click', function () {
+        this.innerHTML = this.innerHTML === 'Toggle Touch On' ? 'Toggle Touch Off' : 'Toggle Touch On';
+      });
+    }
+
+    var boldToggle = document.getElementById('bold-toggle');
+    boldToggle.addEventListener('click', function () {
+      var nodes = document.querySelectorAll('.gel-type-demo');
+      for (var i = 0, l = nodes.length; i < l; i += 1) {
+        var typeClass = nodes[i].dataset.typeClass;
+        nodes[i].classList.toggle('gel-' + typeClass);
+        nodes[i].classList.toggle('gel-' + typeClass + '-bold');
+      }
+
+      this.innerHTML = this.innerHTML === 'Toggle Bold On' ? 'Toggle Bold Off' : 'Toggle Bold On';
+    });
+  }());
+</script>
+</body>
+</html>

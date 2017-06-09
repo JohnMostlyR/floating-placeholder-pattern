@@ -1,0 +1,9 @@
+///*------------------------------------*\
+//    # GRID
+//\*------------------------------------*/
+
+//  Create our width helper classes prefixed with any given alias.
+@if $gel-grid-enable--markup-output {
+  @include gel-output-grid;
+  @include gel-output-widths;
+}

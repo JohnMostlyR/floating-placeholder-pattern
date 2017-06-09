@@ -1,0 +1,45 @@
+/*------------------------------------*\
+    # TEXT ALIGNMENT
+\*------------------------------------*/
+
+/**
+ * A utility for managing the alignment of text elements
+ */
+
+/**
+ * Horizontal alignment
+ */
+.u-align-left {
+  text-align: flip(left, right);
+}
+
+.u-align-center {
+  text-align: center;
+}
+
+.u-align-right {
+  text-align: flip(right, left);
+}
+
+/**
+ * Vertical alignment
+ */
+.u-align-top {
+  vertical-align: top;
+}
+
+.u-align-middle {
+  vertical-align: middle;
+}
+
+.u-align-bottom {
+  vertical-align: bottom;
+}
+
+.u-align-text-top {
+  vertical-align: text-top;
+}
+
+.u-align-text-bottom {
+  vertical-align: text-bottom;
+}

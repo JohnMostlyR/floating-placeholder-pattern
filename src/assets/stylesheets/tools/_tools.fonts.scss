@@ -1,0 +1,40 @@
+//
+// Fonts
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+
+// https://www.smashingmagazine.com/2013/02/setting-weights-and-styles-at-font-face-declaration/
+
+// Regular font
+@mixin base-font-regular() {
+  font-family: "LatoRegular", $gel-type-base-font-stack-sans-serif;
+  font-style: normal !important;
+  font-weight: 400 !important;
+}
+
+// Italic font
+@mixin base-font-italic() {
+  font-family: "LatoItalic", $gel-type-base-font-stack-sans-serif;
+  font-style: italic !important;
+  font-weight: 400 !important;
+}
+
+// Bold font
+@mixin base-font-bold() {
+  font-family: "LatoBold", $gel-type-base-font-stack-sans-serif;
+  font-style: normal !important;
+  font-weight: 700 !important;
+}
+
+// Bold Italic font
+@mixin base-font-bold-italic() {
+  font-family: "LatoBoldItalic", $gel-type-base-font-stack-sans-serif;
+  font-style: italic !important;
+  font-weight: 700 !important;
+}
+
+// Heading font
+@mixin heading-font() {
+  font-family: "BreeSerif", $gel-type-base-font-stack-serif;
+  font-style: normal !important;
+  font-weight: 400 !important;
+}

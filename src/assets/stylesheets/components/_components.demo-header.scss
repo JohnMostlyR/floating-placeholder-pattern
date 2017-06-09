@@ -1,0 +1,114 @@
+/*------------------------------------*\
+    # DEMO HEADER
+\*------------------------------------*/
+
+.c-demo-header {
+  margin-bottom: double($gel-spacing-unit);
+}
+
+.c-demo-header__github-link {
+  display: block;
+  margin: $gel-spacing-unit 0;
+
+  object {
+    max-width: 72px;
+    vertical-align: middle;
+  }
+}
+
+.c-demo-header__banner {
+  border-top: 1px solid $gel-color--alto;
+  border-bottom: 1px solid $gel-color--alto;
+  padding: $gel-alt-spacing-unit 0;
+}
+
+.c-demo-header__banner-link,
+.c-demo-header__banner-link:visited {
+  display: block;
+  position: relative;
+  width: 100%;
+
+  @include mq($from: 460px) {
+    float: flip(right, left);
+    width: auto;
+  }
+
+  @include mq($from: gel-bp-xs) {
+    min-width: 190px;
+  }
+
+  margin: 0;
+  border: 1px solid $gel-color--tundora;
+  padding: double($gel-spacing-unit);
+
+  color: $gel-color--white;
+  text-align: center;
+  text-decoration: none;
+  line-height: 1.2;
+
+  appearance: none;
+  background-color: $gel-color--tundora;
+  cursor: pointer;
+
+  &:focus,
+  &:hover {
+    text-decoration: underline;
+    background-color: #121212;
+  }
+
+  &:active {
+    top: 1px;
+    background-color: $gel-color--orange;
+    border-color: $gel-color--orange;
+  }
+}
+
+.c-demo-header__brand {
+  display: block;
+  margin-bottom: $gel-alt-spacing-unit;
+
+  @include mq($from: 460px) {
+    float: flip(left, right);
+    margin-bottom: 0;
+    padding: halve($gel-alt-spacing-unit) 0;
+  }
+}
+
+.c-demo-header__brand-logo {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+
+  &:active {
+    top: 1px;
+  }
+
+  svg {
+    vertical-align: middle;
+  }
+}
+
+.c-demo-header__brand-beta {
+  padding: 1px halve($gel-spacing-unit);
+
+  font-style: normal;
+  font-weight: bold;
+
+  color: $gel-color--white;
+  background: $gel-color--orange;
+
+  vertical-align: top;
+}
+
+.c-demo-header__intro {
+  margin: double($gel-spacing-unit) 0;
+
+  @include mq($from: gel-bp-l) {
+    margin: quadruple($gel-spacing-unit) 0;
+  }
+}
+
+.c-demo-header__intro-title {
+  margin-top: double($gel-alt-spacing-unit);
+  margin-bottom: $gel-alt-spacing-unit;
+}

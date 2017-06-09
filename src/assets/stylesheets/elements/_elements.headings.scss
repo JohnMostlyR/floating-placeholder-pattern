@@ -1,0 +1,33 @@
+///*------------------------------------*\
+//   # HEADINGS
+///*------------------------------------*\
+
+h1 {
+  @include gel-typography('trafalgar');
+  @include base-font-bold();
+}
+
+h2 {
+  @include gel-typography('double-pica');
+  @include base-font-bold();
+}
+
+h3 {
+  @include gel-typography('great-primer');
+  @include base-font-bold();
+}
+
+h4 {
+  @include gel-typography('pica');
+  @include base-font-bold();
+}
+
+h5 {
+  @include gel-typography('long-primer');
+  @include base-font-bold();
+}
+
+h6 {
+  @include gel-typography('brevier');
+  @include base-font-bold();
+}

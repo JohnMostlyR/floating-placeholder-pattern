@@ -1,0 +1,50 @@
+/*------------------------------------*\
+    # DEMO
+\*------------------------------------*/
+
+// SETTINGS
+@import 'settings/settings.core';
+@import 'settings/settings.demo-global';
+@import 'settings/settings.rtl';
+@import 'settings/settings.grid';
+@import 'settings/settings.typography';
+
+// TOOLS
+@import '../../../node_modules/sass-mq/mq';
+@import 'tools/tools.clearfix';
+@import 'tools/tools.rem';
+@import 'tools/tools.math';
+@import 'tools/tools.flip';
+@import 'tools/tools.grid';
+@import 'tools/tools.typography';
+@import 'tools/tools.hide';
+@import 'tools/tools.fonts';
+
+// GENERIC
+@import 'generic/generic.box-sizing';
+@import '../../../node_modules/normalize.css/normalize';
+@import 'generic/generic.reset';
+
+// ELEMENTS
+@import 'elements/elements.page';
+@import 'elements/elements.demo-links';
+
+// OBJECTS
+@import 'objects/objects.grid';
+@import 'objects/objects.typography';
+
+// COMPONENTS
+@import 'components/components.demo-header';
+@import 'components/components.demo-controls';
+@import 'components/components.grid-controls';
+@import 'components/components.grid-demo';
+@import 'components/components.type-controls';
+@import 'components/components.type-demo';
+
+// UTILITIES
+@import 'utilities/utilities.clearfix';
+@import 'utilities/utilities.display';
+@import 'utilities/utilities.floats';
+@import 'utilities/utilities.text-alignment';
+@import 'utilities/utilities.spacing';
+@import 'utilities/utilities.visibility';

@@ -1,0 +1,23 @@
+///*------------------------------------*\
+//    # TYPOGRAPHY
+//\*------------------------------------*/
+
+// Output the typography styles for the 4 groups
+@if $gel-type-enable--markup-output {
+
+  @each $type-class, $type-values in $gel-type-settings {
+    .#{$gel-type-namespace}#{$type-class},
+    %#{$gel-type-namespace}#{$type-class} {
+      @include gel-typography($type-class);
+    }
+  }
+
+}
+
+body {
+  @if (mixin-exists(base-font-regular)) {
+    @include base-font-regular();
+  } @else {
+    font-family: $gel-type-base-font-stack-sans-serif;
+  }
+}
