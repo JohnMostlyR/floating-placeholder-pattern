@@ -3,31 +3,25 @@
 ///*------------------------------------*\
 
 h1 {
-  @include gel-typography('trafalgar');
-  @include base-font-bold();
+  @include gel-typography('trafalgar-bold');
 }
 
 h2 {
-  @include gel-typography('double-pica');
-  @include base-font-bold();
+  @include gel-typography('double-pica-bold');
 }
 
 h3 {
-  @include gel-typography('great-primer');
-  @include base-font-bold();
+  @include gel-typography('great-primer-bold');
 }
 
 h4 {
-  @include gel-typography('pica');
-  @include base-font-bold();
+  @include gel-typography('pica-bold');
 }
 
 h5 {
-  @include gel-typography('long-primer');
-  @include base-font-bold();
+  @include gel-typography('long-primer-bold');
 }
 
 h6 {
-  @include gel-typography('brevier');
-  @include base-font-bold();
+  @include gel-typography('brevier-bold');
 }

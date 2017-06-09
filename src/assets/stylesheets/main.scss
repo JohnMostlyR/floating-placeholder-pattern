@@ -92,7 +92,7 @@
 
 // Responsive image - The responsive image pattern automatically reserves the space
 //                    needed for an image to be inserted
-//@import 'objects/objects.responsive-image';
+@import 'objects/objects.responsive-image';
 
 // Table - Classes for manipulating `table`s.
 //@import 'objects/objects.table';
@@ -109,9 +109,9 @@
 // High-specificity, very explicit selectors. Overrides and helper classes (e.g. `.u-hidden {}`).
 
 // Clearfix - Bind our clearfix onto a utility class.
-//@import 'utilities/utilities.clearfix';
-//@import 'utilities/utilities.display';
-//@import 'utilities/utilities.floats';
-//@import 'utilities/utilities.text-alignment';
-//@import 'utilities/utilities.spacing';
-//@import 'utilities/utilities.visibility';
+@import 'utilities/utilities.clearfix';
+@import 'utilities/utilities.display';
+@import 'utilities/utilities.floats';
+@import 'utilities/utilities.text-alignment';
+@import 'utilities/utilities.spacing';
+@import 'utilities/utilities.visibility';

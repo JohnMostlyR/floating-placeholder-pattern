@@ -121,8 +121,6 @@
 
     @if (type-of($value) == number and unit($value) == 'px') {
       @include rem($property, $value);
-    } @else {
-      #{$property}: $value;
     }
   }
 }
