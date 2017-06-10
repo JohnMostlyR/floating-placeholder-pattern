@@ -19,3 +19,8 @@ html {
   //overflow-y: scroll; /* [2] */
   min-height: 100%; /* [3] */
 }
+
+body {
+  background-color: $jm-global-bg-color;
+  color: $jm-global-text-color;
+}

@@ -14,3 +14,8 @@ $gel-grid-enable--markup-output: true !default;
 //$rtl: true;
 
 // Colour palette
+$jm-global-text-color: #222;
+$jm-global-bg-color: #f7f7f5;
+$jm-global-paragraph-bg-color: $jm-global-bg-color;
+$jm-global-paragraph-link-color: blue;
+$jm-global-paragraph-link-bg-color-focus: #cef;
