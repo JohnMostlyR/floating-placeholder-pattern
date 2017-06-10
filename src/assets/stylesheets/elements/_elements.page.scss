@@ -20,7 +20,47 @@ html {
   min-height: 100%; /* [3] */
 }
 
+/**
+ * Slightly temper the contrast between your paragraph text and background color
+ * for sufferers of scotopic sensitivity syndrome (or Irlen syndrome)
+ */
 body {
   background-color: $jm-global-bg-color;
   color: $jm-global-text-color;
+}
+
+/**
+ * Establish a vertical rhythm
+ *
+ * 1. To enforce a regularity independent of the ﬂow elements
+ *    apply a basic spacing with a few exceptions.
+ *
+ */
+
+// Ensure that top margins only occur between successive elements
+main * + * {
+  margin-top: $gel-base-line-height; /* [1] */
+
+  // Separate supplementary content such as blockquotes
+  // and illustrations from the paragraph text
+  &:not(p) {
+    margin: double($gel-base-line-height) 0;
+  }
+
+  // Remove empty elements from the flow as it can have an impact
+  // on spacing and vertical rhythm
+  :empty {
+    display: none;
+  }
+}
+
+li, dt, dd, br, th, td {
+  margin-top: 0; /* [1] */
+}
+
+// Make headings appear closer to the content introduced below it.
+* + h2,
+* + h3 {
+  /* em, not rem, now */
+  margin-top: 1.5em;
 }
