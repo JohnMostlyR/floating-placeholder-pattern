@@ -120,31 +120,31 @@
   /**
    * Grid containing element
    */
-  .#{$gel-grid-namespace}wrap {
+  .o-wrap {
     @include gel-wrap;
   }
 
   /**
    * A grid row
    */
-  .#{$gel-grid-namespace}layout {
+  .o-layout {
     @include gel-layout;
   }
 
   /**
    * A single grid item
    */
-  .#{$gel-grid-namespace}layout__item {
+  .o-layout__item {
     @include gel-layout-item;
   }
 
   /**
    * Layouts with no gutters.
    */
-  .#{$gel-grid-namespace}layout--flush {
+  .o-layout--flush {
     margin-left: 0;
 
-    > .#{$gel-grid-namespace}layout__item {
+    > .o-layout__item {
       padding-left: 0;
     }
   }
@@ -153,15 +153,15 @@
    * Reversed rendered order of layout items, e.g. items 1, 2, 3, 4 in your
    * markup will display in order 4, 3, 2, 1 on your page
    */
-  .#{$gel-grid-namespace}layout--rev {
+  .o-layout--rev {
     flex-direction: row-reverse;
 
     .#{$gel-grid-flexbox-feature-detection-class} & {
       direction: rtl;
       text-align: left;
 
-      > .#{$gel-grid-namespace}layout__item,
-      > %#{$gel-grid-namespace}layout__item {
+      > .o-layout__item,
+      > %o-layout__item {
         direction: ltr;
         text-align: left;
       }
@@ -171,10 +171,10 @@
   /**
    * Align layout items to the vertical centers of each other
    */
-  .#{$gel-grid-namespace}layout--middle {
+  .o-layout--middle {
     align-items: center;
 
-    > .#{$gel-grid-namespace}layout__item {
+    > .o-layout__item {
       vertical-align: middle;
     }
   }
@@ -182,10 +182,10 @@
   /**
    * Align layout items to the vertical bottoms of each other
    */
-  .#{$gel-grid-namespace}layout--bottom {
+  .o-layout--bottom {
     align-items: flex-end;
 
-    > .#{$gel-grid-namespace}layout__item {
+    > .o-layout__item {
       vertical-align: bottom;
     }
   }
@@ -193,11 +193,11 @@
   /**
    * Make the layout items fill up from the right hand side
    */
-  .#{$gel-grid-namespace}layout--right {
+  .o-layout--right {
     text-align: right;
     justify-content: flex-end;
 
-    > .#{$gel-grid-namespace}layout__item {
+    > .o-layout__item {
       text-align: flip(left, right);
     }
   }
@@ -205,11 +205,11 @@
   /**
    * Make the layout items fill up from the center outward
    */
-  .#{$gel-grid-namespace}layout--center {
+  .o-layout--center {
     text-align: center;
     justify-content: center;
 
-    > .#{$gel-grid-namespace}layout__item {
+    > .o-layout__item {
       text-align: flip(left, right);
     }
   }
@@ -217,8 +217,8 @@
   /**
    * Cause layout items to take up a non-explicit amount of width
    */
-  .#{$gel-grid-namespace}layout--auto {
-    > .#{$gel-grid-namespace}layout__item {
+  .o-layout--auto {
+    > .o-layout__item {
       width: auto;
     }
   }
@@ -228,11 +228,11 @@
    *
    * 1. Prevents floated layout items from shrinking the layout
    */
-  .#{$gel-grid-namespace}layout--no-flex {
+  .o-layout--no-flex {
     min-width: 100%; // [1]
 
     &,
-    > .#{$gel-grid-namespace}layout__item {
+    > .o-layout__item {
       display: inline-block;
     }
   }
@@ -240,8 +240,8 @@
   /**
    * Force items to be of equal height
    */
-  .#{$gel-grid-namespace}layout--equal {
-    > .#{$gel-grid-namespace}layout__item {
+  .o-layout--equal {
+    > .o-layout__item {
       display: flex;
     }
   }
@@ -249,8 +249,8 @@
   /**
    * Allow items to devide the space equally between the number of items
    */
-  .#{$gel-grid-namespace}layout--fit {
-    > .#{$gel-grid-namespace}layout__item {
+  .o-layout--fit {
+    > .o-layout__item {
       width: auto;
       flex: 1 1 auto;
     }
@@ -259,21 +259,21 @@
   /**
    * Align a single grid item to the top
    */
-  .#{$gel-grid-namespace}layout__item--top {
+  .o-layout__item--top {
     align-self: flex-start;
   }
 
   /**
    * Align a single grid item to the center
    */
-  .#{$gel-grid-namespace}layout__item--center {
+  .o-layout__item--center {
     align-self: center;
   }
 
   /**
    * Align a single grid item to the bottom
    */
-  .#{$gel-grid-namespace}layout__item--bottom {
+  .o-layout__item--bottom {
     align-self: flex-end;
   }
 }
@@ -353,12 +353,12 @@
   @each $column in $columns {
     @if $column == 1 {
       // no point outputting 100% several times so lets just do it once
-      .#{$gel-grid-namespace}#{$column}\/#{$column}#{$breakpoint-suffix} {
+      .u-#{$column}\/#{$column}#{$breakpoint-suffix} {
         width: 100% !important;
       }
     } @else {
       @for $i from 1 to $column {
-        .#{$gel-grid-namespace}#{$i}\/#{$column}#{$breakpoint-suffix} {
+        .u-#{$i}\/#{$column}#{$breakpoint-suffix} {
           width: gel-columns($i / $column) !important;
         }
       }

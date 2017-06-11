@@ -1,7 +1,8 @@
-em {
+em,
+i {
   @include base-font-italic();
 
-  &.bold {
+  &.u-bold {
     @include base-font-bold-italic();
   }
 }
