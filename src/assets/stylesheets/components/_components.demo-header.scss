@@ -3,12 +3,12 @@
 \*------------------------------------*/
 
 .c-demo-header {
-  margin-bottom: double($gel-spacing-unit);
+  margin-bottom: double($jm-spacing-unit);
 }
 
 .c-demo-header__github-link {
   display: block;
-  margin: $gel-spacing-unit 0;
+  margin: $jm-spacing-unit 0;
 
   object {
     max-width: 72px;
@@ -17,9 +17,9 @@
 }
 
 .c-demo-header__banner {
-  border-top: 1px solid $gel-color--alto;
-  border-bottom: 1px solid $gel-color--alto;
-  padding: $gel-alt-spacing-unit 0;
+  border-top: 1px solid $jm-demo-color--alto;
+  border-bottom: 1px solid $jm-demo-color--alto;
+  padding: $jm-alt-spacing-unit 0;
 }
 
 .c-demo-header__banner-link,
@@ -38,16 +38,16 @@
   }
 
   margin: 0;
-  border: 1px solid $gel-color--tundora;
-  padding: double($gel-spacing-unit);
+  border: 1px solid $jm-demo-color--tundora;
+  padding: double($jm-spacing-unit);
 
-  color: $gel-color--white;
+  color: $jm-demo-color--white;
   text-align: center;
   text-decoration: none;
   line-height: 1.2;
 
   appearance: none;
-  background-color: $gel-color--tundora;
+  background-color: $jm-demo-color--tundora;
   cursor: pointer;
 
   &:focus,
@@ -58,19 +58,19 @@
 
   &:active {
     top: 1px;
-    background-color: $gel-color--orange;
-    border-color: $gel-color--orange;
+    background-color: $jm-demo-color--orange;
+    border-color: $jm-demo-color--orange;
   }
 }
 
 .c-demo-header__brand {
   display: block;
-  margin-bottom: $gel-alt-spacing-unit;
+  margin-bottom: $jm-alt-spacing-unit;
 
   @include mq($from: 460px) {
     float: flip(left, right);
     margin-bottom: 0;
-    padding: halve($gel-alt-spacing-unit) 0;
+    padding: halve($jm-alt-spacing-unit) 0;
   }
 }
 
@@ -89,26 +89,26 @@
 }
 
 .c-demo-header__brand-beta {
-  padding: 1px halve($gel-spacing-unit);
+  padding: 1px halve($jm-spacing-unit);
 
   font-style: normal;
   font-weight: bold;
 
-  color: $gel-color--white;
-  background: $gel-color--orange;
+  color: $jm-demo-color--white;
+  background: $jm-demo-color--orange;
 
   vertical-align: top;
 }
 
 .c-demo-header__intro {
-  margin: double($gel-spacing-unit) 0;
+  margin: double($jm-spacing-unit) 0;
 
   @include mq($from: u-bp-l) {
-    margin: quadruple($gel-spacing-unit) 0;
+    margin: quadruple($jm-spacing-unit) 0;
   }
 }
 
 .c-demo-header__intro-title {
-  margin-top: double($gel-alt-spacing-unit);
-  margin-bottom: $gel-alt-spacing-unit;
+  margin-top: double($jm-alt-spacing-unit);
+  margin-bottom: $jm-alt-spacing-unit;
 }

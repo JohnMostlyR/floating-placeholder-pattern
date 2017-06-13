@@ -3,13 +3,11 @@
 //\*------------------------------------*/
 
 // typography
-$gel-type-enable--markup-output: true !default;
+$jm-type-enable--markup-output: true !default;
 
 // grid
-$gel-grid-1280-toggle-class: 'b-pw-1280' !default;
-$gel-grid-breakpoints: (xs, s, m, l, xl) !default;
-$gel-grid-breakpoints--1280: (xxl) !default;
-$gel-grid-enable--markup-output: true !default;
+$jm-grid-breakpoints: (xs, s, m, l, xl) !default;
+$jm-grid-enable--markup-output: true !default;
 
 //$rtl: true;
 

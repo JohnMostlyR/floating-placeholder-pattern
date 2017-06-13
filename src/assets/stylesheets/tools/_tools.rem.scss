@@ -24,7 +24,7 @@ $gel-tools-rem-enable--fallback: true !default;
 //
 // @author          Kaelig - https://github.com/guardian/guss-rem
 //
-@function rem($value, $baseline: $gel-base-font-size) {
+@function rem($value, $baseline: $jm-base-font-size) {
 
   // if function is disabled then return the value
   @if ($gel-tools-rem-enable--function == false) {

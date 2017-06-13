@@ -90,7 +90,7 @@
  * If both icon and text are present we need to space them out
  */
 .o-bullet__icon + .o-bullet__text {
-  #{$margin-left}: $gel-spacing-unit;
+  #{$margin-left}: $jm-spacing-unit;
 }
 
 /**
@@ -98,7 +98,7 @@
  */
 .o-bullet\- {
   .o-bullet__icon + .o-bullet__text {
-    #{$margin-left}: halve($gel-spacing-unit);
+    #{$margin-left}: halve($jm-spacing-unit);
   }
 }
 
@@ -107,7 +107,7 @@
  */
 .o-bullet\+ {
   .o-bullet__icon + .o-bullet__text {
-    #{$margin-left}: double($gel-spacing-unit);
+    #{$margin-left}: double($jm-spacing-unit);
   }
 }
 
@@ -117,18 +117,18 @@
  */
 .o-bullet--essential {
   .o-bullet__icon + .o-bullet__text {
-    #{$margin-left}: $gel-spacing-unit;
+    #{$margin-left}: $jm-spacing-unit;
   }
 
   .o-bullet\- {
     .o-bullet__icon + .o-bullet__text {
-      #{$margin-left}: halve($gel-spacing-unit);
+      #{$margin-left}: halve($jm-spacing-unit);
     }
   }
 
   .o-bullet\+ {
     .o-bullet__icon + .o-bullet__text {
-      #{$margin-left}: double($gel-spacing-unit);
+      #{$margin-left}: double($jm-spacing-unit);
     }
   }
 }
@@ -142,6 +142,6 @@
 
   .o-bullet__icon {
     #{$margin-right}: 0;
-    #{$margin-left}: halve($gel-spacing-unit);
+    #{$margin-left}: halve($jm-spacing-unit);
   }
 }

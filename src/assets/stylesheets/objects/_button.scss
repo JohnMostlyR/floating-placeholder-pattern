@@ -17,7 +17,7 @@
 
   margin: 0; /* [3] */
 
-  padding: $gel-spacing-unit;
+  padding: $jm-spacing-unit;
 
   text-align: center; /* [3] */
 
@@ -36,7 +36,7 @@
 }
 
 .gs-o-button--big {
-  padding: double($gel-spacing-unit);
+  padding: double($jm-spacing-unit);
 }
 
 .gs-o-button--full {
@@ -45,50 +45,50 @@
 }
 
 .gs-o-button--primary {
-  background-color: $sp-c-charcoal;
-  color: $sp-c-white;
+  background-color: $jm-demo-color-charcoal;
+  color: $jm-demo-color-white;
 
   &:hover,
   &:active {
-    background-color: $sp-c-black;
+    background-color: $jm-demo-color-black;
   }
 }
 
 .gs-o-button--secondary {
-  background-color: $sp-c-cloud;
-  color: $sp-c-charcoal;
+  background-color: $jm-demo-color-cloud;
+  color: $jm-demo-color-charcoal;
 
   &:hover,
   &:active {
-    background-color: darken($sp-c-cloud, 5%);
+    background-color: darken($jm-demo-color-cloud, 5%);
   }
 }
 
 .gs-o-button--clear {
   background-color: transparent;
-  color: $sp-c-charcoal;
+  color: $jm-demo-color-charcoal;
 
   &:hover,
   &:active {
     background-color: transparent;
-    color: $sp-c-black;
+    color: $jm-demo-color-black;
   }
 }
 
 .gs-o-button--white {
-  background: $sp-c-white;
-  color: $sp-c-charcoal;
+  background: $jm-demo-color-white;
+  color: $jm-demo-color-charcoal;
 
   &:hover,
   &:active {
-    background: $sp-c-white;
-    color: $sp-c-black;
+    background: $jm-demo-color-white;
+    color: $jm-demo-color-black;
   }
 }
 
 .gs-o-button--my-bbc {
   background-color: $mb-c-blue-ribbon;
-  color: $sp-c-white;
+  color: $jm-demo-color-white;
 
   &:hover {
     background-color: $mb-c-science-blue;
@@ -97,7 +97,7 @@
 
 .gs-o-button--share {
   background-color: $c-share-green;
-  color: $sp-c-white;
+  color: $jm-demo-color-white;
 
   &:hover {
     background-color: darken($c-share-green, 5%);
@@ -105,7 +105,7 @@
 }
 
 .gs-o-button--border {
-  border: 1px solid $sp-c-black;
+  border: 1px solid $jm-demo-color-black;
 }
 
 .gs-o-button[disabled],

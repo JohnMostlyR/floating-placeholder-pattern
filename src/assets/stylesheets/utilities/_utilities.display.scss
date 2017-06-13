@@ -12,7 +12,7 @@
  *
  */
 
-$display-switch-breakpoint-names: $gel-grid-breakpoints !default;
+$display-switch-breakpoint-names: $jm-grid-breakpoints !default;
 
 @mixin display-switch($suffix: null) {
   $breakpoint-suffix: '';
@@ -61,7 +61,7 @@ $display-switch-breakpoint-names: $gel-grid-breakpoints !default;
 @include display-switch();
 
 @each $breakpoint in $display-switch-breakpoint-names {
-  @include mq($from: '#{$gel-grid-breakpoint-namespace}#{$breakpoint}') {
+  @include mq($from: '#{$jm-grid-breakpoint-namespace}#{$breakpoint}') {
     @include display-switch($breakpoint);
   }
 }

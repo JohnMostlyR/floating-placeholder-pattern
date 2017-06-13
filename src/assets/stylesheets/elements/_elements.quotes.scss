@@ -3,22 +3,22 @@
 //\*------------------------------------*/
 
 q {
-  @include gel-typography('quote');
-  font-family: $gel-type-base-font-stack-serif;
+  @include jm-typography('quote');
+  font-family: $jm-type-base-font-stack-serif;
   font-style: italic;
 }
 
 q b,
 q strong {
-  @include gel-typography('quote');
-  font-family: $gel-type-base-font-stack-serif;
+  @include jm-typography('quote');
+  font-family: $jm-type-base-font-stack-serif;
   font-style: italic !important;
 }
 
 blockquote {
-  @include gel-typography('block-quote');
+  @include jm-typography('block-quote');
   color: $jm-global-text-color;
-  font-family: $gel-type-base-font-stack-serif;
+  font-family: $jm-type-base-font-stack-serif;
   font-style: italic;
 
   &:before {
@@ -28,7 +28,7 @@ blockquote {
 
 blockquote b,
 blockquote strong {
-  @include gel-typography('block-quote');
-  font-family: $gel-type-base-font-stack-serif;
+  @include jm-typography('block-quote');
+  font-family: $jm-type-base-font-stack-serif;
   font-style: italic !important;
 }

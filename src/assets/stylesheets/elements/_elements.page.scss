@@ -14,8 +14,8 @@
  * 3. Ensure the page always fills at least the entire height of the viewport.
  */
 html {
-  font-size: ($gel-base-font-size / 16px) * 1em; /* [1] */
-  line-height: $gel-base-line-height / $gel-base-font-size; /* [1] */
+  font-size: ($jm-base-font-size / 16px) * 1em; /* [1] */
+  line-height: $jm-base-line-height / $jm-base-font-size; /* [1] */
   //overflow-y: scroll; /* [2] */
   min-height: 100%; /* [3] */
 }

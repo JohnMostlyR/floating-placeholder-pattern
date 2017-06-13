@@ -23,7 +23,7 @@
   text-align: center; /* [4] */
   margin: 0; /* [4] */
   cursor: pointer; /* [5] */
-  padding: halve($gel-alt-spacing-unit) $gel-spacing-unit;
+  padding: halve($jm-alt-spacing-unit) $jm-spacing-unit;
   transition: $global-transition;
   border-radius: $global-radius;
 }
@@ -90,11 +90,11 @@
 // SIZE VARIANTS
 
 .c-block-link--small {
-  padding: quarter($gel-spacing-unit) halve($gel-spacing-unit);
+  padding: quarter($jm-spacing-unit) halve($jm-spacing-unit);
 }
 
 .c-block-link--large {
-  padding: $gel-spacing-unit double($gel-spacing-unit);
+  padding: $jm-spacing-unit double($jm-spacing-unit);
 }
 
 
@@ -106,7 +106,7 @@ $link-ghost-border-width: 2px;
 
 .c-block-link--ghost {
   border: $link-ghost-border-width solid currentColor;
-  padding: (halve($gel-spacing-unit) - $link-ghost-border-width) ($gel-spacing-unit - $link-ghost-border-width);
+  padding: (halve($jm-spacing-unit) - $link-ghost-border-width) ($jm-spacing-unit - $link-ghost-border-width);
 
   &,
   &:hover,
@@ -116,11 +116,11 @@ $link-ghost-border-width: 2px;
   }
 
   &.c-block-link--small {
-    padding: (quarter($gel-spacing-unit) - $link-ghost-border-width) (halve($gel-spacing-unit) - $link-ghost-border-width);
+    padding: (quarter($jm-spacing-unit) - $link-ghost-border-width) (halve($jm-spacing-unit) - $link-ghost-border-width);
   }
 
   &.c-block-link--large {
-    padding: ($gel-spacing-unit - $link-ghost-border-width) (double($gel-spacing-unit) - $link-ghost-border-width);
+    padding: ($jm-spacing-unit - $link-ghost-border-width) (double($jm-spacing-unit) - $link-ghost-border-width);
   }
 
   &.c-block-link--primary {

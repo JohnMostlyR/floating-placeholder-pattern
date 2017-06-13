@@ -29,10 +29,10 @@
 @include visibility-hidden();
 
 // Output the suffixed version
-$visibility-hidden-breakpoint-names: $gel-grid-breakpoints !default;
+$visibility-hidden-breakpoint-names: $jm-grid-breakpoints !default;
 
 @each $breakpoint in $visibility-hidden-breakpoint-names {
-  @include mq($from: '#{$gel-grid-breakpoint-namespace}#{$breakpoint}') {
+  @include mq($from: '#{$jm-grid-breakpoint-namespace}#{$breakpoint}') {
     @include visibility-hidden($breakpoint);
   }
 }

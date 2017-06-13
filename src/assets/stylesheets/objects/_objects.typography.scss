@@ -3,12 +3,12 @@
 //\*------------------------------------*/
 
 // Output the typography styles for the 4 groups
-@if $gel-type-enable--markup-output {
+@if $jm-type-enable--markup-output {
 
-  @each $type-class, $type-values in $gel-type-settings {
-    .#{$gel-type-namespace}#{$type-class},
-    %#{$gel-type-namespace}#{$type-class} {
-      @include gel-typography($type-class);
+  @each $type-class, $type-values in $jm-type-settings {
+    .#{$jm-type-namespace}#{$type-class},
+    %#{$jm-type-namespace}#{$type-class} {
+      @include jm-typography($type-class);
     }
   }
 
@@ -18,6 +18,6 @@ body {
   @if (mixin-exists(base-font-regular)) {
     @include base-font-regular();
   } @else {
-    font-family: $gel-type-base-font-stack-sans-serif;
+    font-family: $jm-type-base-font-stack-sans-serif;
   }
 }

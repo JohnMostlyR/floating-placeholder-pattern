@@ -8,12 +8,12 @@
  */
 .o-list-ui,
 .o-list-ui__item {
-  border: 0 solid $sp-c-silver;
+  border: 0 solid $jm-demo-color-silver;
 }
 
 .o-list-ui {
   margin: 0;
-  margin-bottom: double($gel-spacing-unit);
+  margin-bottom: double($jm-spacing-unit);
   padding: 0;
   list-style: none;
   border-top-width: 1px;
@@ -23,10 +23,10 @@
  * A subtle border variant of the list ui
  */
 .o-list-ui--subtle {
-  border-top-color: $sp-c-cloud;
+  border-top-color: $jm-demo-color-cloud;
 
   .o-list-ui__item {
-    border-bottom-color: $sp-c-cloud;
+    border-bottom-color: $jm-demo-color-cloud;
   }
 }
 
@@ -41,10 +41,10 @@
 }
 
 .o-list-ui__item {
-  padding-bottom: $gel-spacing-unit;
-  padding-top: $gel-spacing-unit;
-  #{$padding-left}: $gel-spacing-unit;
-  #{$padding-right}: $gel-spacing-unit;
+  padding-bottom: $jm-spacing-unit;
+  padding-top: $jm-spacing-unit;
+  #{$padding-left}: $jm-spacing-unit;
+  #{$padding-right}: $jm-spacing-unit;
 
   border-bottom-width: 1px;
 }
@@ -56,19 +56,19 @@
 .o-list-ui__link {
   display: block;
 
-  padding: $gel-spacing-unit 0;
+  padding: $jm-spacing-unit 0;
 
-  color: $sp-c-black;
+  color: $jm-demo-color-black;
 
   &:hover .c-media-icon,
   &:focus .c-media-icon {
-    background-color: $sp-c-yellow;
-    color: $sp-c-black;
+    background-color: $jm-demo-color-yellow;
+    color: $jm-demo-color-black;
   }
 
   &:hover .c-media-icon--live,
   &:focus .c-media-icon--live {
-    background-color: $sp-c-live-blue;
-    color: $sp-c-white;
+    background-color: $jm-demo-color-live-blue;
+    color: $jm-demo-color-white;
   }
 }

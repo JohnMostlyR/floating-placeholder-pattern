@@ -3,14 +3,14 @@
 \*------------------------------------*/
 
 .c-grid-demo-section {
-  margin-top: double($gel-spacing-unit);
-  border-top: 1px solid $gel-color--alto;
-  padding-top: double($gel-spacing-unit);
+  margin-top: double($jm-spacing-unit);
+  border-top: 1px solid $jm-demo-color--alto;
+  padding-top: double($jm-spacing-unit);
 }
 
 .c-grid-demo__summary {
-  margin-top: halve($gel-spacing-unit);
-  color: $gel-color--cod-gray;
+  margin-top: halve($jm-spacing-unit);
+  color: $jm-demo-color--cod-gray;
 }
 
 /**
@@ -18,13 +18,13 @@
  */
 .c-grid-demo-item {
   width: 100%;
-  padding: $gel-spacing-unit;
+  padding: $jm-spacing-unit;
 
   background-color: #d4e7eb;
-  color: $gel-color--black;
+  color: $jm-demo-color--black;
 
   @include mq($from: u-bp-s) {
-    padding: double($gel-spacing-unit);
+    padding: double($jm-spacing-unit);
   }
 }
 

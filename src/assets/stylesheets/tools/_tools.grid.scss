@@ -6,15 +6,15 @@
 //
 // @author Shaun Bent
 //
-@mixin gel-wrap() {
+@mixin jm-wrap() {
   max-width: $jm-grid-max-width;
   margin: 0 auto;
-  padding-right: $gel-spacing-unit;
-  padding-left: $gel-spacing-unit;
+  padding-right: $jm-spacing-unit;
+  padding-left: $jm-spacing-unit;
 
-  @include mq($from: $gel-grid-margin-change) {
-    padding-left: double($gel-spacing-unit);
-    padding-right: double($gel-spacing-unit);
+  @include mq($from: $jm-grid-margin-change) {
+    padding-left: double($jm-spacing-unit);
+    padding-right: double($jm-spacing-unit);
   }
 }
 
@@ -28,7 +28,7 @@
 //
 // @author Shaun Bent
 //
-@mixin gel-layout() {
+@mixin jm-layout() {
   list-style: none; // [1]
   direction: flip(ltr, rtl);
   text-align: flip(left, right);
@@ -37,15 +37,15 @@
   flex-flow: row wrap;
   flex-grow: 1;
   margin-right: 0; // [2]
-  margin-left: -$gel-spacing-unit;
+  margin-left: -$jm-spacing-unit;
   padding-right: 0; // [2]
   padding-left: 0; // [2]
 
-  @include mq($from: $gel-grid-gutter-change) {
-    margin-left: double(-$gel-spacing-unit);
+  @include mq($from: $jm-grid-gutter-change) {
+    margin-left: double(-$jm-spacing-unit);
   }
 
-  @if $gel-grid-enable--whitespace-fix {
+  @if $jm-grid-enable--whitespace-fix {
     letter-spacing: -0.31em;
     text-rendering: optimizespeed;
 
@@ -69,19 +69,19 @@
 //
 // @author  Shaun Bent
 //
-@mixin gel-layout-item() {
+@mixin jm-layout-item() {
   width: 100%;
   display: inline-block; // [1]
-  padding-left: $gel-spacing-unit; // [2]
+  padding-left: $jm-spacing-unit; // [2]
 
   text-align: flip(left, right); // [3]
   vertical-align: top; // [4]
 
-  @include mq($from: $gel-grid-gutter-change) {
-    padding-left: double($gel-spacing-unit); // [2]
+  @include mq($from: $jm-grid-gutter-change) {
+    padding-left: double($jm-spacing-unit); // [2]
   }
 
-  @if $gel-grid-enable--whitespace-fix {
+  @if $jm-grid-enable--whitespace-fix {
     letter-spacing: normal;
     word-spacing: normal;
     text-rendering: auto;
@@ -92,26 +92,26 @@
 //
 // @author Shaun Bent
 //
-@mixin gel-output-grid() {
+@mixin jm-output-grid() {
   /**
    * Grid containing element
    */
   .o-wrap {
-    @include gel-wrap;
+    @include jm-wrap;
   }
 
   /**
    * A grid row
    */
   .o-layout {
-    @include gel-layout;
+    @include jm-layout;
   }
 
   /**
    * A single grid item
    */
   .o-layout__item {
-    @include gel-layout-item;
+    @include jm-layout-item;
   }
 
   /**
@@ -132,7 +132,7 @@
   .o-layout--rev {
     flex-direction: row-reverse;
 
-    .#{$gel-grid-flexbox-feature-detection-class} & {
+    .#{$jm-grid-flexbox-feature-detection-class} & {
       direction: rtl;
       text-align: left;
 
@@ -257,17 +257,14 @@
 // Outputs a collection of grid-agnostic width utility classes which can be applied be
 // combined with the grid system or applied to any element to give it a percentage based with.
 //
-// If the optional 1280 toggle class is defined then all 1280 width classes will be wrapped
-// in the specified toggle class
-//
 // @author Shaun Bent
 //
-@mixin gel-output-widths() {
-  @include _gel-widths($gel-grid-columns);
+@mixin jm-output-widths() {
+  @include _jm-widths($jm-grid-columns);
 
-  @each $breakpoint in $gel-grid-breakpoints {
-    @include mq($from: '#{$gel-grid-breakpoint-namespace}#{$breakpoint}') {
-      @include _gel-widths($gel-grid-columns, $breakpoint);
+  @each $breakpoint in $jm-grid-breakpoints {
+    @include mq($from: '#{$jm-grid-breakpoint-namespace}#{$breakpoint}') {
+      @include _jm-widths($jm-grid-columns, $breakpoint);
     }
   }
 }
@@ -275,13 +272,13 @@
 // Returns a percentage value for the required number of columns
 //
 // @param {Number}  $span - number of columns required to span
-// @param {Number}  $columns ($gel-grid-default-columns) - total number of columns available
+// @param {Number}  $columns ($jm-grid-default-columns) - total number of columns available
 //
 // @return {Number} Percentage for the required number of columns
 //
 // @author          Shaun Bent
 //
-@function gel-columns($span, $columns: $gel-grid-default-columns) {
+@function jm-columns($span, $columns: $jm-grid-default-columns) {
   @if $span >= 1 {
     // Convert the given span to a fraction of the columns
     @return percentage($span / $columns);
@@ -294,12 +291,12 @@
 // Get a width for a specific number of columns
 //
 // @param {Number} $span - number of columns required to span
-// @param {Number} $columns ($gel-grid-default-columns) - total number of columns available
+// @param {Number} $columns ($jm-grid-default-columns) - total number of columns available
 //
 // @author Shaun Bent
 //
-@mixin gel-columns($span, $columns: $gel-grid-default-columns) {
-  width: gel-columns($span, $columns);
+@mixin jm-columns($span, $columns: $jm-grid-default-columns) {
+  width: jm-columns($span, $columns);
 }
 
 // Generate width classes for the requested columns and breakpoint modifier
@@ -309,7 +306,7 @@
 //
 // @author Shaun Bent
 //
-@mixin _gel-widths($columns, $breakpoint: null) {
+@mixin _jm-widths($columns, $breakpoint: null) {
   $breakpoint-suffix: '';
 
   @if $breakpoint != null {
@@ -325,7 +322,7 @@
     } @else {
       @for $i from 1 to $column {
         .u-#{$i}\/#{$column}#{$breakpoint-suffix} {
-          width: gel-columns($i / $column) !important;
+          width: jm-columns($i / $column) !important;
         }
       }
     }

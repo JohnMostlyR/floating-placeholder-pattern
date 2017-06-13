@@ -12,7 +12,7 @@
  *
  */
 
-$float-breakpoints: $gel-grid-breakpoints !default;
+$float-breakpoints: $jm-grid-breakpoints !default;
 
 @mixin floats($suffix: null) {
   $breakpoint-suffix: '';
@@ -38,7 +38,7 @@ $float-breakpoints: $gel-grid-breakpoints !default;
 @include floats();
 
 @each $breakpoint in $float-breakpoints {
-  @include mq($from: '#{$gel-grid-breakpoint-namespace}#{$breakpoint}') {
+  @include mq($from: '#{$jm-grid-breakpoint-namespace}#{$breakpoint}') {
     @include floats($breakpoint);
   }
 }
@@ -57,7 +57,7 @@ $float-breakpoints: $gel-grid-breakpoints !default;
  *
  */
 
-$clear-breakpoints: $gel-grid-breakpoints !default;
+$clear-breakpoints: $jm-grid-breakpoints !default;
 
 @mixin clears($suffix: null) {
   $breakpoint-suffix: '';
@@ -83,7 +83,7 @@ $clear-breakpoints: $gel-grid-breakpoints !default;
 @include clears();
 
 @each $breakpoint in $clear-breakpoints {
-  @include mq($from: '#{$gel-grid-breakpoint-namespace}#{$breakpoint}') {
+  @include mq($from: '#{$jm-grid-breakpoint-namespace}#{$breakpoint}') {
     @include clears($breakpoint);
   }
 }

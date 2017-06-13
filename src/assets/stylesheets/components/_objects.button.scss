@@ -5,15 +5,15 @@
   display: inline-block;
 
   margin: 0;
-  border: 1px solid $gel-color--tundora;
-  padding: double($gel-spacing-unit);
+  border: 1px solid $jm-demo-color--tundora;
+  padding: double($jm-spacing-unit);
 
-  color: $gel-color--white;
+  color: $jm-demo-color--white;
   text-align: center;
   text-decoration: none;
   line-height: 1.2;
 
-  background-color: $gel-color--tundora;
+  background-color: $jm-demo-color--tundora;
   appearance: none;
   cursor: pointer;
 
@@ -29,8 +29,8 @@
 
   &:active {
     top: 1px;
-    background-color: $gel-color--orange;
-    border-color: $gel-color--orange;
+    background-color: $jm-demo-color--orange;
+    border-color: $jm-demo-color--orange;
   }
 
   /*.gel-icon--inline {
@@ -43,12 +43,12 @@
  */
 .o-button--clear {
   background-color: transparent;
-  color: $gel-color--tundora;
+  color: $jm-demo-color--tundora;
 
   &:focus,
   &:hover {
     background-color: transparent;
-    border-color: $gel-color--tundora;
+    border-color: $jm-demo-color--tundora;
   }
 
   &:active {

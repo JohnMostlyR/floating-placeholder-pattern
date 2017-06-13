@@ -3,39 +3,39 @@
 //\*------------------------------------*/
 
 // The following variables provide a common configuration to use across
-// various GEL components. These variables should not be modified or
+// various components. These variables should not be modified or
 // adjusted directly; you should predefine the variables in your own project,
 // to override these default settings.
 
 
 /// Namespace
 //
-// By default all GEL components are namespaced with `gel-`, this allows us to
+// By default all components are namespaced with `jm-`, this allows us to
 // share components without the chance of there being any conflicts within existing
 // products. It also helps with sharing components across products.
 //
 // @type String
 //
-$gel-namespace: 'gel-' !default;
+$jm-namespace: 'jm-' !default;
 
 
 
 /// Spacing
 //
-// GEL spacing is based on an 8px baseline and multiples of this number, where possible
+// Spacing is based on an 8px baseline and multiples of this number, where possible
 // this baseline and multiples of should act as your default spacing unit. This helps to
 // ensure we have consistent spacing across products.
 //
 // @type Number (with units)
 //
-$gel-spacing-unit: 8px !default;
+$jm-spacing-unit: 8px !default;
 
 // We also make available an alternative spacing unit based on a 12px baseline to allow more
 // flexibility with spacing elements
 //
 // @type Number (with units)
 //
-$gel-alt-spacing-unit: 12px !default;
+$jm-alt-spacing-unit: 12px !default;
 
 
 
@@ -49,8 +49,8 @@ $gel-alt-spacing-unit: 12px !default;
 //
 // @type Number (with units)
 //
-$gel-base-font-size: 16px !default;
-$gel-base-line-height: 24px !default;
+$jm-base-font-size: 16px !default;
+$jm-base-line-height: 24px !default;
 
 
 
@@ -66,35 +66,35 @@ $gel-base-line-height: 24px !default;
 //
 // @type String
 //
-$gel-breakpoint-prefix: 'u-bp-' !default;
+$jm-breakpoint-prefix: 'u-bp-' !default;
 
 // The names applied to each of our breakpoints. We're taking a t-shirt sizing naming convention
 //
 // @type Map
 //
-$gel-breakpoint-names: (xs, s, m, l, xl, xxl) !default;
+$jm-breakpoint-names: (xs, s, m, l, xl, xxl) !default;
 
 // The widths of our major breakpoints
 //
 // @type Map
 //
-$gel-breakpoint-sizes: (240px, 400px, 600px, 900px, 1008px, 1280px) !default;
+$jm-breakpoint-sizes: (240px, 400px, 600px, 900px, 1008px, 1280px) !default;
 
 // If we're generating a fixed width output which breakpoint to use as the maximum
 //
 // @type String
 //
-$gel-breakpoint-static: u-bp-l !default;
+$jm-breakpoint-static: u-bp-l !default;
 
 
 // Loop through each of our breakpoint-sizes, map this with the appropriate name
 // and append it to the $mq-breakpoints map.
-$gel-breakpoints: ();
-@each $breakpoint in $gel-breakpoint-sizes {
-  $i: index($gel-breakpoint-sizes, $breakpoint);
-  $breakpoint-name: #{$gel-breakpoint-prefix}#{nth($gel-breakpoint-names, $i)};
+$jm-breakpoints: ();
+@each $breakpoint in $jm-breakpoint-sizes {
+  $i: index($jm-breakpoint-sizes, $breakpoint);
+  $breakpoint-name: #{$jm-breakpoint-prefix}#{nth($jm-breakpoint-names, $i)};
 
-  $gel-breakpoints: map-merge($gel-breakpoints, ($breakpoint-name: $breakpoint)) !global;
+  $jm-breakpoints: map-merge($jm-breakpoints, ($breakpoint-name: $breakpoint)) !global;
 }
 
 
@@ -106,13 +106,13 @@ $gel-breakpoints: ();
 // versions of IE
 
 // MQ expects a Sass Map containing the available breakpoints
-$mq-breakpoints: $gel-breakpoints;
+$mq-breakpoints: $jm-breakpoints;
 
 // In order to output the appropriate styles for older versions of IE which don't
 // support Media Queries we need to define which breakpoint we want styles output for
-$mq-static-breakpoint: #{$gel-breakpoint-static};
+$mq-static-breakpoint: #{$jm-breakpoint-static};
 
 
 
 // Define a variable so we can tell the other components the settings are available
-$gel-settings-available: true;
+$jm-settings-available: true;

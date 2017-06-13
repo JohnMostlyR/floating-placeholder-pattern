@@ -17,7 +17,7 @@
  * by applying a basic spacing [1] with just a few exceptions [2].
 */
 .c-story * + * {
-  margin-top: rem($gel-base-line-height); /* [1] */
+  margin-top: rem($jm-base-line-height); /* [1] */
 }
 
 .c-story li,
@@ -36,7 +36,7 @@
 .c-story * + h2,
 .c-story * + h3 {
   /* em, not rem, now */
-  margin-top: $gel-base-line-height / $gel-base-font-size + em;
+  margin-top: $jm-base-line-height / $jm-base-font-size + em;
 }
 
 .c-story__body {
@@ -57,27 +57,27 @@
 
   .c-media-asset--lead {
     display: block;
-    margin-right: -$gel-spacing-unit;
-    margin-bottom: double($gel-spacing-unit);
-    margin-left: -$gel-spacing-unit;
+    margin-right: -$jm-spacing-unit;
+    margin-bottom: double($jm-spacing-unit);
+    margin-left: -$jm-spacing-unit;
 
     @include mq($from: u-bp-s) {
-      margin-right: double(-$gel-spacing-unit);
-      margin-left: double(-$gel-spacing-unit);
+      margin-right: double(-$jm-spacing-unit);
+      margin-left: double(-$jm-spacing-unit);
     }
 
     @include mq($from: u-bp-s) {
       .sp-media-asset__caption {
-        padding-top: $gel-alt-spacing-unit;
-        padding-right: double(-$gel-spacing-unit);
-        padding-bottom: $gel-alt-spacing-unit;
-        padding-left: double(-$gel-spacing-unit);
+        padding-top: $jm-alt-spacing-unit;
+        padding-right: double(-$jm-spacing-unit);
+        padding-bottom: $jm-alt-spacing-unit;
+        padding-left: double(-$jm-spacing-unit);
       }
     }
 
     @include mq($from: u-bp-m) {
       margin-right: -10%;
-      margin-bottom: rem($gel-base-line-height);
+      margin-bottom: rem($jm-base-line-height);
       margin-left: -10%;
     }
 
@@ -106,14 +106,14 @@
   display: table;
   width: 100%;
   table-layout: fixed;
-  margin-bottom: double($gel-spacing-unit);
+  margin-bottom: double($jm-spacing-unit);
   margin-top: 0;
-  padding-top: $gel-spacing-unit;
-  padding-bottom: $gel-spacing-unit;
+  padding-top: $jm-spacing-unit;
+  padding-bottom: $jm-spacing-unit;
   border-bottom: 1px solid #dbdbdb;
 
   @include mq($from: u-bp-m) {
-    margin-bottom: rem($gel-base-line-height);
+    margin-bottom: rem($jm-base-line-height);
   }
 
   &__list {

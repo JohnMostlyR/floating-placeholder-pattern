@@ -50,7 +50,7 @@
  * 2. Fixes problem with images disappearing.
  */
 .o-flag__img {
-  #{$padding-right}: $gel-spacing-unit;
+  #{$padding-right}: $jm-spacing-unit;
   width: 1px; /* [1] */
 
   > img {

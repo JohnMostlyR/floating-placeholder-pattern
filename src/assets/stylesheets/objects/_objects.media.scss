@@ -24,7 +24,7 @@
 
 .o-media__img {
   float: flip(left, right);
-  #{$margin-right}: $gel-spacing-unit;
+  #{$margin-right}: $jm-spacing-unit;
 
   > img {
     display: block;

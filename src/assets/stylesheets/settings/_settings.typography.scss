@@ -1,47 +1,47 @@
 ///*------------------------------------*\
-//    # GEL TYPOGRAPHY - SETTINGS
+//    # TYPOGRAPHY - SETTINGS
 //\*------------------------------------*/
 
-// The following variables are used to configure the GEL Typography component.
+// The following variables are used to configure the Typography component.
 // These variables should not be modified or adjusted directly; you should
 // predefine the variables in your own project, to override these default settings.
 
 /// General configuration
 //
 // The default namespace applied to all typography classes output is inherits
-// from the default gel-namespace: `gel-`.
+// from the default jm-namespace: `jm-`.
 //
 // @type String
 // @link http://bit.ly/1Z6hPfd
 //
-$gel-type-namespace: $gel-namespace !default;
+$jm-type-namespace: $jm-namespace !default;
 
 /// Font stacks
 //
 // Base Font stack - sans-serif
-$gel-type-base-font-stack-sans-serif: "Segoe UI", Roboto, "Droid Sans", "Helvetica Neue", Helvetica, Arial, freesans, sans-serif !default;
+$jm-type-base-font-stack-sans-serif: "Segoe UI", Roboto, "Droid Sans", "Helvetica Neue", Helvetica, Arial, freesans, sans-serif !default;
 
 // Base Font stack - serif
-$gel-type-base-font-stack-serif: "Roboto Slab", "Droid Serif", Cambria, Georgia, "Times New Roman", Times, serif !default;
+$jm-type-base-font-stack-serif: "Roboto Slab", "Droid Serif", Cambria, Georgia, "Times New Roman", Times, serif !default;
 
 // The classname used to signify if the device needs to display the no-touch group. This
 // class needs to be applied to high level element such as `body` or `html`
 //
 // @type String
 //
-$gel-type-touch-class: 'no-touch' !default;
+$jm-type-touch-class: 'no-touch' !default;
 
 // Which typography group contains the base or core typography styles
 //
 // @type String
 //
-$gel-type-base-group: 'group-a';
+$jm-type-base-group: 'group-a';
 
 // Which typography group contains our non-touch typography styles
 //
 // @type String
 //
-$gel-type-no-touch-group: 'group-d';
+$jm-type-no-touch-group: 'group-d';
 
 /// Output configuration
 //
@@ -51,15 +51,15 @@ $gel-type-no-touch-group: 'group-d';
 //
 // @type Bool
 //
-$gel-type-enable--markup-output: false !default;
+$jm-type-enable--markup-output: false !default;
 
-// The GEL typography specification for each type class at each type group.
+// The typography specification for each type class at each type group.
 // Having these values stored in a map allows them to be easily updated and
 // customised for specific non-latin character sets.
 //
 // @type Map
 //
-$gel-type-settings: (
+$jm-type-settings: (
   'canon': (
     'group-a': (
       'font-size': 28px,
@@ -312,8 +312,8 @@ $gel-type-settings: (
 // of breakpoints
 //
 @if (mixin-exists(mq)) {
-  @include mq-add-breakpoint(gel-bp-type-b, 320px);
-  @include mq-add-breakpoint(gel-bp-type-c, 600px);
+  @include mq-add-breakpoint(jm-bp-type-b, 320px);
+  @include mq-add-breakpoint(jm-bp-type-c, 600px);
 } @else {
   @warn 'Missing dependency: `Sass MQ`. Ensure this is included before this library';
 }

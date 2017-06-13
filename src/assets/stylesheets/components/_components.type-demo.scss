@@ -2,17 +2,17 @@
     # TYPE DEMO
 \*------------------------------------*/
 
-.gel-type-demo {
-  margin-bottom: 16px;
-  padding-top: 16px;
+.jm-type-demo {
+  margin-bottom: double($jm-spacing-unit);
+  padding-top: double($jm-spacing-unit);
   border-top: 1px solid #dcdcdc;
 }
 
-.gel-type-demo:first-child {
+.jm-type-demo:first-child {
   border-top: 0;
 }
 
-.gel-type-demo--body-copy {
+.jm-type-demo--body-copy {
   margin-top: 64px;
   border-top-color: #dbdbdb;
   border-top-width: 2px;
@@ -20,37 +20,37 @@
 
 /**
  * 1. Just in case this is nested within a bold type class
- * 2. Unset minon if you're using minon
+ * 2. Unset minion if you're using minion
  */
-.gel-type-demo__class {
-  margin-bottom: 8px;
+.jm-type-demo__class {
+  margin-bottom: $jm-spacing-unit;
   color: #565656;
   letter-spacing: 0; /* [1] */
   text-transform: none; /* [2] */
 }
 
-.gel-type-demo__class-name,
-.gel-type-demo__class-html {
+.jm-type-demo__class-name,
+.jm-type-demo__class-html {
   display: inline-block;
   vertical-align: middle;
 }
 
-.gel-type-demo__class-name {
-  margin-right: 8px;
+.jm-type-demo__class-name {
+  margin-right: $jm-spacing-unit;
 }
 
-.gel-type-demo__class-html {
+.jm-type-demo__class-html {
   margin-bottom: 0;
 }
 
 /**
  * 1. Remove an text-transforms which might be missing with the look and feel
  */
-.gel-type-demo__sample-scale {
+.jm-type-demo__sample-scale {
   text-transform: none; /* [1] */
 }
 
-.gel-type-demo__settings {
+.jm-type-demo__settings {
   color: #e6711b;
 }
 
@@ -65,184 +65,184 @@
 /**
  * Output the type settings for each font-class for each group
  */
-[data-type-class="canon"] .gel-type-demo__settings:after {
+[data-type-class="canon"] .jm-type-demo__settings:after {
   content: "28/32";
 }
 
 @media (min-width: 20em) {
-  [data-type-class="canon"] .gel-type-demo__settings:after {
+  [data-type-class="canon"] .jm-type-demo__settings:after {
     content: "32/36";
   }
 }
 
 @media (min-width: 37.5em) {
-  [data-type-class="canon"] .gel-type-demo__settings:after {
+  [data-type-class="canon"] .jm-type-demo__settings:after {
     content: "52/56";
   }
-  .no-touch [data-type-class="canon"] .gel-type-demo__settings:after {
+  .no-touch [data-type-class="canon"] .jm-type-demo__settings:after {
     content: "44/48";
   }
 }
 
-[data-type-class="canon-bold"] .gel-type-demo__settings:after {
+[data-type-class="canon-bold"] .jm-type-demo__settings:after {
   content: "44/48";
 }
 
-[data-type-class="trafalgar"] .gel-type-demo__settings:after {
+[data-type-class="trafalgar"] .jm-type-demo__settings:after {
   content: "20/24";
 }
 
 @media (min-width: 20em) {
-  [data-type-class="trafalgar"] .gel-type-demo__settings:after {
+  [data-type-class="trafalgar"] .jm-type-demo__settings:after {
     content: "24/28";
   }
 }
 
 @media (min-width: 37.5em) {
-  [data-type-class="trafalgar"] .gel-type-demo__settings:after {
+  [data-type-class="trafalgar"] .jm-type-demo__settings:after {
     content: "36/40";
   }
-  .no-touch [data-type-class="trafalgar"] .gel-type-demo__settings:after {
+  .no-touch [data-type-class="trafalgar"] .jm-type-demo__settings:after {
     content: "32/36";
   }
 }
 
-[data-type-class="trafalgar-bold"] .gel-type-demo__settings:after {
+[data-type-class="trafalgar-bold"] .jm-type-demo__settings:after {
   content: "32/36";
 }
 
-[data-type-class="double-pica"] .gel-type-demo__settings:after {
+[data-type-class="double-pica"] .jm-type-demo__settings:after {
   content: "20/24";
 }
 
 @media (min-width: 37.5em) {
-  [data-type-class="double-pica"] .gel-type-demo__settings:after {
+  [data-type-class="double-pica"] .jm-type-demo__settings:after {
     content: "26/30";
   }
-  .no-touch [data-type-class="double-pica"] .gel-type-demo__settings:after {
+  .no-touch [data-type-class="double-pica"] .jm-type-demo__settings:after {
     content: "24/28";
   }
 }
 
-[data-type-class="double-pica-bold"] .gel-type-demo__settings:after {
+[data-type-class="double-pica-bold"] .jm-type-demo__settings:after {
   content: "24/28";
 }
 
-[data-type-class="great-primer"] .gel-type-demo__settings:after {
+[data-type-class="great-primer"] .jm-type-demo__settings:after {
   content: "18/22";
 }
 
 @media (min-width: 37.5em) {
-  [data-type-class="great-primer"] .gel-type-demo__settings:after {
+  [data-type-class="great-primer"] .jm-type-demo__settings:after {
     content: "21/24";
   }
-  .no-touch [data-type-class="great-primer"] .gel-type-demo__settings:after {
+  .no-touch [data-type-class="great-primer"] .jm-type-demo__settings:after {
     content: "20/24";
   }
 }
 
-[data-type-class="great-primer-bold"] .gel-type-demo__settings:after {
+[data-type-class="great-primer-bold"] .jm-type-demo__settings:after {
   content: "20/24";
 }
 
 @media (min-width: 20em) {
-  [data-type-class="great-primer-bold"] .gel-type-demo__settings:after {
+  [data-type-class="great-primer-bold"] .jm-type-demo__settings:after {
     content: "20/24";
   }
 }
 
-[data-type-class="pica"] .gel-type-demo__settings:after {
+[data-type-class="pica"] .jm-type-demo__settings:after {
   content: "15/20";
 }
 
 @media (min-width: 20em) {
-  [data-type-class="pica"] .gel-type-demo__settings:after {
+  [data-type-class="pica"] .jm-type-demo__settings:after {
     content: "16/20";
   }
 }
 
 @media (min-width: 37.5em) {
-  [data-type-class="pica"] .gel-type-demo__settings:after {
+  [data-type-class="pica"] .jm-type-demo__settings:after {
     content: "18/22";
   }
-  .no-touch [data-type-class="pica"] .gel-type-demo__settings:after {
+  .no-touch [data-type-class="pica"] .jm-type-demo__settings:after {
     content: "16/20";
   }
 }
 
-[data-type-class="pica-bold"] .gel-type-demo__settings:after {
+[data-type-class="pica-bold"] .jm-type-demo__settings:after {
   content: "16/20";
 }
 
-[data-type-class="long-primer"] .gel-type-demo__settings:after {
+[data-type-class="long-primer"] .jm-type-demo__settings:after {
   content: "15/18";
 }
 
 @media (min-width: 37.5em) {
-  [data-type-class="long-primer"] .gel-type-demo__settings:after {
+  [data-type-class="long-primer"] .jm-type-demo__settings:after {
     content: "15/20";
   }
-  .no-touch [data-type-class="long-primer"] .gel-type-demo__settings:after {
+  .no-touch [data-type-class="long-primer"] .jm-type-demo__settings:after {
     content: "14/18";
   }
 }
 
-[data-type-class="long-primer-bold"] .gel-type-demo__settings:after {
+[data-type-class="long-primer-bold"] .jm-type-demo__settings:after {
   content: "14/18";
 }
 
-[data-type-class="brevier"] .gel-type-demo__settings:after {
+[data-type-class="brevier"] .jm-type-demo__settings:after {
   content: "14/16";
 }
 
 @media (min-width: 20em) {
-  [data-type-class="brevier"] .gel-type-demo__settings:after {
+  [data-type-class="brevier"] .jm-type-demo__settings:after {
     content: "14/18";
   }
 }
 
 @media (min-width: 37.5em) {
-  .no-touch [data-type-class="brevier"] .gel-type-demo__settings:after {
+  .no-touch [data-type-class="brevier"] .jm-type-demo__settings:after {
     content: "13/16";
   }
 }
 
-[data-type-class="brevier-bold"] .gel-type-demo__settings:after {
+[data-type-class="brevier-bold"] .jm-type-demo__settings:after {
   content: "13/16";
 }
 
-[data-type-class="minion"] .gel-type-demo__settings:after {
+[data-type-class="minion"] .jm-type-demo__settings:after {
   content: "12/16";
 }
 
 @media (min-width: 37.5em) {
-  [data-type-class="minion"] .gel-type-demo__settings:after {
+  [data-type-class="minion"] .jm-type-demo__settings:after {
     content: "13/16";
   }
-  .no-touch [data-type-class="minion"] .gel-type-demo__settings:after {
+  .no-touch [data-type-class="minion"] .jm-type-demo__settings:after {
     content: "12/16";
   }
 }
 
-[data-type-class="minion-bold"] .gel-type-demo__settings:after {
+[data-type-class="minion-bold"] .jm-type-demo__settings:after {
   content: "12/16";
 }
 
-[data-type-class="body-copy"] .gel-type-demo__settings:after {
+[data-type-class="body-copy"] .jm-type-demo__settings:after {
   content: "15/20";
 }
 
 @media (min-width: 20em) {
-  [data-type-class="body-copy"] .gel-type-demo__settings:after {
+  [data-type-class="body-copy"] .jm-type-demo__settings:after {
     content: "16/22";
   }
 }
 
 @media (min-width: 37.5em) {
-  [data-type-class="body-copy"] .gel-type-demo__settings:after {
+  [data-type-class="body-copy"] .jm-type-demo__settings:after {
     content: "18/24";
   }
-  .no-touch [data-type-class="body-copy"] .gel-type-demo__settings:after {
+  .no-touch [data-type-class="body-copy"] .jm-type-demo__settings:after {
     content: "16/22";
   }
 }

@@ -8,7 +8,7 @@
 .o-table {
   width: 100%;
   border-collapse: separate;
-  margin-bottom: double($gel-spacing-unit);
+  margin-bottom: double($jm-spacing-unit);
 }
 
 /**
@@ -34,13 +34,13 @@
 }
 
 .o-table__head {
-  background: $sp-c-mist;
+  background: $jm-demo-color-mist;
 
   .o-table__cell {
-    border-bottom: 1px solid $sp-c-silver;
+    border-bottom: 1px solid $jm-demo-color-silver;
 
-    padding-top: double($gel-spacing-unit);
-    padding-bottom: halve($gel-spacing-unit);
+    padding-top: double($jm-spacing-unit);
+    padding-bottom: halve($jm-spacing-unit);
 
     vertical-align: bottom;
   }
@@ -52,27 +52,27 @@
 .o-table__row {
   &:focus,
   &:hover {
-    background-color: $sp-c-mist;
+    background-color: $jm-demo-color-mist;
   }
 }
 
 .o-table__row--disabled {
   &,
   .o-table__link {
-    color: $sp-c-mortar;
+    color: $jm-demo-color-mortar;
   }
 }
 
 .o-table__row--highlighted {
-  background-color: $sp-c-solitude-blue;
+  background-color: $jm-demo-color-solitude-blue;
 
   &:focus,
   &:hover {
-    background-color: darken($sp-c-solitude-blue, 5%);
+    background-color: darken($jm-demo-color-solitude-blue, 5%);
   }
 
   .o-table__cell {
-    border-bottom: 1px solid darken($sp-c-solitude-blue, 4%);
+    border-bottom: 1px solid darken($jm-demo-color-solitude-blue, 4%);
   }
 }
 
@@ -81,7 +81,7 @@
  */
 .o-table__row--break {
   .o-table__cell {
-    border-bottom: 1px dashed $sp-c-charcoal;
+    border-bottom: 1px dashed $jm-demo-color-charcoal;
   }
 }
 
@@ -89,16 +89,16 @@
  * 1. Force first and last cells to have increased padding
  */
 .o-table__cell {
-  border-bottom: 1px solid $sp-c-cloud;
-  padding: $gel-spacing-unit halve($gel-spacing-unit);
+  border-bottom: 1px solid $jm-demo-color-cloud;
+  padding: $jm-spacing-unit halve($jm-spacing-unit);
   text-align: center;
 
   &:first-child {
-    #{$padding-left}: $gel-spacing-unit; /* [1] */
+    #{$padding-left}: $jm-spacing-unit; /* [1] */
   }
 
   &:last-child {
-    #{$padding-right}: $gel-spacing-unit; /* [1] */
+    #{$padding-right}: $jm-spacing-unit; /* [1] */
   }
 }
 
@@ -111,11 +111,11 @@
 }
 
 .o-table__cell--border-right {
-  #{$border-right}: 1px solid $sp-c-cloud;
+  #{$border-right}: 1px solid $jm-demo-color-cloud;
 }
 
 .o-table__cell--border-left {
-  #{$border-left}: 1px solid $sp-c-cloud;
+  #{$border-left}: 1px solid $jm-demo-color-cloud;
 }
 
 .o-table__cell--left {
@@ -135,13 +135,13 @@
 }
 
 .o-table__cell--break {
-  border-top: 1px dashed $sp-c-charcoal;
+  border-top: 1px dashed $jm-demo-color-charcoal;
 }
 
 .o-table__link {
   display: block;
 
-  color: $sp-c-black;
+  color: $jm-demo-color-black;
   font-weight: bold;
 
   &:focus,

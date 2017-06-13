@@ -50,12 +50,12 @@
  *
  */
 .o-list-inline--divided {
-  margin-top: halve(-$gel-spacing-unit); /* [1] */
+  margin-top: halve(-$jm-spacing-unit); /* [1] */
 
   > li {
-    #{$margin-right}: halve($gel-alt-spacing-unit);
-    margin-top: halve($gel-spacing-unit);
-    #{$padding-right}: halve($gel-alt-spacing-unit);
+    #{$margin-right}: halve($jm-alt-spacing-unit);
+    margin-top: halve($jm-spacing-unit);
+    #{$padding-right}: halve($jm-alt-spacing-unit);
     #{$border-right}: 1px solid $jm-global-line-divided-list-divider-color;
   }
 
@@ -76,11 +76,11 @@
  * 1. Offset the margin-top applied to items
  */
 .o-list-inline--spaced {
-  margin-top: halve(-$gel-spacing-unit); /* [1] */
+  margin-top: halve(-$jm-spacing-unit); /* [1] */
 
   > li {
-    #{$margin-right}: $gel-spacing-unit;
-    margin-top: halve($gel-spacing-unit);
+    #{$margin-right}: $jm-spacing-unit;
+    margin-top: halve($jm-spacing-unit);
   }
 
   > li:last-child {

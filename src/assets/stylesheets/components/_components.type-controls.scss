@@ -5,97 +5,97 @@
 /**
  * 1. Remove the margin from the last item
  */
-.gel-type-controls {
+.jm-type-controls {
   position: relative;
-  margin-right: -8px;
-  margin-bottom: 16px;
-  margin-left: -8px;
-  padding: 8px;
-  background-color: #e6711b;
-  color: #fff;
+  margin-right: -$jm-spacing-unit;
+  margin-bottom: double($jm-spacing-unit);
+  margin-left: -$jm-spacing-unit;
+  padding: $jm-spacing-unit;
+  background-color: $jm-demo-color--orange;
+  color: $jm-demo-color--white;
 }
 
 @media (min-width: 25em) {
-  .gel-type-controls {
-    margin-right: -16px;
-    margin-left: -16px;
-    padding: 16px;
+  .jm-type-controls {
+    margin-right: double(-$jm-spacing-unit);
+    margin-left: double(-$jm-spacing-unit);
+    padding: $jm-spacing-unit;
   }
 }
 
 @media (min-width: 56.25em) {
-  .gel-type-controls {
+  .jm-type-controls {
     margin-right: 0;
     margin-left: 0;
   }
 }
 
-.gel-type-controls > :last-child {
+.jm-type-controls > :last-child {
   margin-bottom: 0; /* [1] */
 }
 
-.gel-type-controls__label {
-  margin-bottom: 8px;
+.jm-type-controls__label {
+  margin-bottom: $jm-spacing-unit;
 }
 
-.gel-type-controls__toggle-controls {
+.jm-type-controls__toggle-controls {
   position: absolute;
-  bottom: 8px;
-  right: 8px;
+  bottom: $jm-spacing-unit;
+  right: $jm-spacing-unit;
 }
 
 @media (min-width: 25em) {
-  .gel-type-controls__toggle-controls {
-    bottom: 16px;
-    right: 16px;
+  .jm-type-controls__toggle-controls {
+    bottom: double($jm-spacing-unit);
+    right: double($jm-spacing-unit);
   }
 }
 
-.gel-type-controls__mode-toggle {
+.jm-type-controls__mode-toggle {
   padding: 0;
   border: 0;
   outline: 0;
-  color: #fff;
+  color: $jm-demo-color--white;
   background: none;
 }
 
-.gel-type-controls__mode-toggle:focus, .gel-type-controls__mode-toggle:hover {
+.jm-type-controls__mode-toggle:focus, .jm-type-controls__mode-toggle:hover {
   text-decoration: underline;
 }
 
-.gel-type-controls__mode-toggle--bold {
+.jm-type-controls__mode-toggle--bold {
   display: inline-block;
 }
 
-.gel-type-controls__mode-toggle--touch {
+.jm-type-controls__mode-toggle--touch {
   display: none;
 }
 
 @media (min-width: 28.75em) {
-  .gel-type-controls__mode-toggle--touch {
+  .jm-type-controls__mode-toggle--touch {
     display: inline-block;
-    margin-left: 8px;
+    margin-left: $jm-spacing-unit;
   }
 }
 
 /**
  * Change the group name based on the current media-query
  */
-.gel-type-controls__group-name:after {
+.jm-type-controls__group-name:after {
   content: 'Group A (0 - 319px)';
 }
 
 @media (min-width: 20em) {
-  .gel-type-controls__group-name:after {
+  .jm-type-controls__group-name:after {
     content: 'Group B (320px - 599px)';
   }
 }
 
 @media (min-width: 37.5em) {
-  .gel-type-controls__group-name:after {
+  .jm-type-controls__group-name:after {
     content: 'Group C (600+, Touch available)';
   }
-  .no-touch .gel-type-controls__group-name:after {
+  .no-touch .jm-type-controls__group-name:after {
     content: 'Group D (600+, Touch not available)';
   }
 }
@@ -103,21 +103,21 @@
 /**
  * Change the example device based on the current media-query
  */
-.gel-type-controls__example-device:after {
+.jm-type-controls__example-device:after {
   content: 'Feature Phones';
 }
 
 @media (min-width: 20em) {
-  .gel-type-controls__example-device:after {
+  .jm-type-controls__example-device:after {
     content: 'Default & Smart Phones';
   }
 }
 
 @media (min-width: 37.5em) {
-  .gel-type-controls__example-device:after {
+  .jm-type-controls__example-device:after {
     content: 'Typically Tablet Devices';
   }
-  .no-touch .gel-type-controls__example-device:after {
+  .no-touch .jm-type-controls__example-device:after {
     content: 'Typically Desktop or Laptop Screens';
   }
 }

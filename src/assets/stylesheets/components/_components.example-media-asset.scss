@@ -14,10 +14,10 @@
     background-color: #ededed;
     color: #5a5a5a;
     margin-top: 0;
-    padding: $gel-spacing-unit;
+    padding: $jm-spacing-unit;
 
     @include mq($from: u-bp-m) {
-      padding: double($gel-spacing-unit);
+      padding: double($jm-spacing-unit);
     }
   }
 
@@ -26,7 +26,7 @@
     right: 0;
     bottom: 0;
     z-index: 2;
-    padding: halve($gel-spacing-unit);
+    padding: halve($jm-spacing-unit);
     background-color: #121212;
     background-color: rgba(18,18,18,0.5);
     color: #fff;
