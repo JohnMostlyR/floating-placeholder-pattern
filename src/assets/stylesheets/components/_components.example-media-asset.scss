@@ -1,0 +1,35 @@
+///*------------------------------------*\
+//    # MEDIA ASSET
+//\*------------------------------------*/
+
+/**
+ * Info
+ */
+.c-media-asset {
+  &__body {
+    position: relative;
+  }
+
+  &__caption {
+    background-color: #ededed;
+    color: #5a5a5a;
+    margin-top: 0;
+    padding: $gel-spacing-unit;
+
+    @include mq($from: u-bp-m) {
+      padding: double($gel-spacing-unit);
+    }
+  }
+
+  &__copyright {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    padding: halve($gel-spacing-unit);
+    background-color: #121212;
+    background-color: rgba(18,18,18,0.5);
+    color: #fff;
+    text-transform: initial !important
+  }
+}

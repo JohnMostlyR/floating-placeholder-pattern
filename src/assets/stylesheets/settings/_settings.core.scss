@@ -66,7 +66,7 @@ $gel-base-line-height: 24px !default;
 //
 // @type String
 //
-$gel-breakpoint-prefix: 'gel-bp-' !default;
+$gel-breakpoint-prefix: 'u-bp-' !default;
 
 // The names applied to each of our breakpoints. We're taking a t-shirt sizing naming convention
 //
@@ -84,7 +84,7 @@ $gel-breakpoint-sizes: (240px, 400px, 600px, 900px, 1008px, 1280px) !default;
 //
 // @type String
 //
-$gel-breakpoint-static: gel-bp-l !default;
+$gel-breakpoint-static: u-bp-l !default;
 
 
 // Loop through each of our breakpoint-sizes, map this with the appropriate name

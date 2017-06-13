@@ -19,10 +19,10 @@ $gel-type-namespace: $gel-namespace !default;
 /// Font stacks
 //
 // Base Font stack - sans-serif
-$gel-type-base-font-stack-sans-serif: '"Segoe UI", Roboto, "Droid Sans", "Helvetica Neue", Helvetica, Arial, freesans, sans-serif' !default;
+$gel-type-base-font-stack-sans-serif: "Segoe UI", Roboto, "Droid Sans", "Helvetica Neue", Helvetica, Arial, freesans, sans-serif !default;
 
 // Base Font stack - serif
-$gel-type-base-font-stack-serif: '"Roboto Slab", "Droid Serif", Cambria, Georgia, "Times New Roman", Times, serif' !default;
+$gel-type-base-font-stack-serif: "Roboto Slab", "Droid Serif", Cambria, Georgia, "Times New Roman", Times, serif !default;
 
 // The classname used to signify if the device needs to display the no-touch group. This
 // class needs to be applied to high level element such as `body` or `html`

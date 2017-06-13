@@ -3,7 +3,6 @@
  *    for sufferers of scotopic sensitivity syndrome (or Irlen syndrome)
  */
 p {
-  @include gel-typography('pica');
   background-color: $jm-global-paragraph-bg-color; /* [1] */
   color: $jm-global-text-color; /* [1] */
 

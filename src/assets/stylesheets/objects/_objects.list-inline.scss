@@ -56,7 +56,7 @@
     #{$margin-right}: halve($gel-alt-spacing-unit);
     margin-top: halve($gel-spacing-unit);
     #{$padding-right}: halve($gel-alt-spacing-unit);
-    #{$border-right}: 1px solid $sp-c-silver;
+    #{$border-right}: 1px solid $jm-global-line-divided-list-divider-color;
   }
 
   > li:last-child {

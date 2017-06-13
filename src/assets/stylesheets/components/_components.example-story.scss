@@ -1,0 +1,129 @@
+///*------------------------------------*\
+//    # STORY
+//\*------------------------------------*/
+
+/**
+ * A story, or article, but we choose 'story' to avoid confusion with
+ * the article element.
+ */
+.c-story {
+  p:empty {
+    display: none; // remove empty paragraphs to avoid messing up vertical rhythm.
+  }
+}
+
+/**
+ * Enforce a regularity independent of the ﬂow elements
+ * by applying a basic spacing [1] with just a few exceptions [2].
+*/
+.c-story * + * {
+  margin-top: rem($gel-base-line-height); /* [1] */
+}
+
+.c-story li,
+.c-story dt,
+.c-story dd,
+.c-story br,
+.c-story th,
+.c-story td {
+  margin-top: 0; /* [2] */
+}
+
+/**
+ * Make subsections headings appear visually closer to the content below
+ * it by making it relative to its own font size.
+ */
+.c-story * + h2,
+.c-story * + h3 {
+  /* em, not rem, now */
+  margin-top: $gel-base-line-height / $gel-base-font-size + em;
+}
+
+.c-story__body {
+  word-wrap: break-word;
+
+  @include mq($from: u-bp-l) {
+    margin-right: 12.5%;
+  }
+
+  .c-media-asset {
+    clear: right;
+    display: block;
+
+    @include mq($from: u-bp-l) {
+      margin-right: -7.1428571429%;
+    }
+  }
+
+  .c-media-asset--lead {
+    display: block;
+    margin-right: -$gel-spacing-unit;
+    margin-bottom: double($gel-spacing-unit);
+    margin-left: -$gel-spacing-unit;
+
+    @include mq($from: u-bp-s) {
+      margin-right: double(-$gel-spacing-unit);
+      margin-left: double(-$gel-spacing-unit);
+    }
+
+    @include mq($from: u-bp-s) {
+      .sp-media-asset__caption {
+        padding-top: $gel-alt-spacing-unit;
+        padding-right: double(-$gel-spacing-unit);
+        padding-bottom: $gel-alt-spacing-unit;
+        padding-left: double(-$gel-spacing-unit);
+      }
+    }
+
+    @include mq($from: u-bp-m) {
+      margin-right: -10%;
+      margin-bottom: rem($gel-base-line-height);
+      margin-left: -10%;
+    }
+
+    @include mq($from: u-bp-l) {
+      margin-right: -14.285714286%;
+      margin-left: 0;
+    }
+  }
+}
+
+.c-story__byline {
+
+}
+
+.c-story__byline--stacked {
+  text-align: center;
+}
+
+.c-story__byline-img {
+  height: rem(64px);
+  width: rem(64px);
+  border-radius: 50%;
+}
+
+.c-story__info {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  margin-bottom: double($gel-spacing-unit);
+  margin-top: 0;
+  padding-top: $gel-spacing-unit;
+  padding-bottom: $gel-spacing-unit;
+  border-bottom: 1px solid #dbdbdb;
+
+  @include mq($from: u-bp-m) {
+    margin-bottom: rem($gel-base-line-height);
+  }
+
+  &__list {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+  }
+
+  &__share {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}

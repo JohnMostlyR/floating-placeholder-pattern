@@ -28,3 +28,7 @@ body {
   background-color: $jm-global-bg-color;
   color: $jm-global-text-color;
 }
+
+main {
+  overflow-x: hidden;
+}

@@ -1,0 +1,25 @@
+///*------------------------------------*\
+//    # SIDEBAR
+//\*------------------------------------*/
+
+/**
+ * Info
+ */
+.c-sidebar {
+
+}
+
+.c-sidebar-widget {
+  padding-top: rem($gel-base-line-height);
+
+  @include mq($from: u-bp-l) {
+    border-left: 1px solid #dbdbdb;
+    padding-left: 1rem;
+    padding-top: 0;
+  }
+
+  &__h2 {
+    @include gel-typography('great-primer');
+    @include base-font-regular;
+  }
+}

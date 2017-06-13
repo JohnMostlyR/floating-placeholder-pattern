@@ -20,7 +20,7 @@
     $breakpoint-suffix: \@#{$suffix};
   }
 
-  .u-vh#{$breakpoint-suffix} {
+  .u-visually-hidden#{$breakpoint-suffix} {
     @include visually-hidden;
   }
 }
@@ -51,8 +51,8 @@ $visibility-hidden-breakpoint-names--1280: $gel-grid-breakpoints--1280 !default;
  * to be focusable when navigated to via the keyboard:
  * http://bit.ly/1sfefwH
  */
-.u-vh--focusable:active,
-.u-vh--focusable:focus {
+.u-visually-hidden--focusable:active,
+.u-visually-hidden--focusable:focus {
   @include visually-hidden;
 
   position: static;

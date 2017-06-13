@@ -15,8 +15,8 @@
  * 5. Force all button-styled elements to appear clickable.
  */
 
-.c-link,
-.c-link:visited {
+.c-block-link,
+.c-block-link:visited {
   display: inline-block; /* [1] */
   vertical-align: middle; /* [2] */
   font: inherit; /* [3] */
@@ -31,7 +31,7 @@
 
 // STYLE VARIANTS
 
-.c-link--primary {
+.c-block-link--primary {
   background-color: #4a8ec2;
 
   &,
@@ -49,7 +49,7 @@
 
 }
 
-.c-link--secondary {
+.c-block-link--secondary {
   background-color: #2f4054;
 
   &,
@@ -67,7 +67,7 @@
 
 }
 
-.c-link--tertiary {
+.c-block-link--tertiary {
   background-color: #fff;
   color: #4a8ec2;
 
@@ -89,11 +89,11 @@
 
 // SIZE VARIANTS
 
-.c-link--small {
+.c-block-link--small {
   padding: quarter($gel-spacing-unit) halve($gel-spacing-unit);
 }
 
-.c-link--large {
+.c-block-link--large {
   padding: $gel-spacing-unit double($gel-spacing-unit);
 }
 
@@ -104,7 +104,7 @@
 
 $link-ghost-border-width: 2px;
 
-.c-link--ghost {
+.c-block-link--ghost {
   border: $link-ghost-border-width solid currentColor;
   padding: (halve($gel-spacing-unit) - $link-ghost-border-width) ($gel-spacing-unit - $link-ghost-border-width);
 
@@ -115,15 +115,15 @@ $link-ghost-border-width: 2px;
     background: none;
   }
 
-  &.c-link--small {
+  &.c-block-link--small {
     padding: (quarter($gel-spacing-unit) - $link-ghost-border-width) (halve($gel-spacing-unit) - $link-ghost-border-width);
   }
 
-  &.c-link--large {
+  &.c-block-link--large {
     padding: ($gel-spacing-unit - $link-ghost-border-width) (double($gel-spacing-unit) - $link-ghost-border-width);
   }
 
-  &.c-link--primary {
+  &.c-block-link--primary {
     color: #4a8ec2;
 
     &:hover,
@@ -133,7 +133,7 @@ $link-ghost-border-width: 2px;
 
   }
 
-  &.c-link--secondary {
+  &.c-block-link--secondary {
     color: #2f4054;
 
     &:hover,
@@ -143,7 +143,7 @@ $link-ghost-border-width: 2px;
 
   }
 
-  &.c-link--tertiary {
+  &.c-block-link--tertiary {
     color: #fff;
 
     &:hover,

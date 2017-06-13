@@ -1,5 +1,5 @@
 /*------------------------------------*\
-    # MAIN
+    # EXAMPLE
 \*------------------------------------*/
 
 // SETTINGS
@@ -52,6 +52,7 @@
 @import 'elements/elements.images';
 @import 'elements/elements.tables';
 @import 'elements/elements.headings';
+//@import 'elements/elements.font-weights';
 @import 'elements/elements.paragraph';
 @import 'elements/elements.emphasis';
 @import 'elements/elements.quotes';
@@ -74,22 +75,22 @@
 //@import 'objects/objects.bullet';
 
 // Flag - Table-layout-based advancement on the Media object.
-//@import 'objects/objects.flag';
+@import 'objects/objects.flag';
 
 // Icons -
 //@import 'objects/objects.icons';
 
 // List-inline - A list whose items all sit in a line.
-//@import 'objects/objects.list-inline';
+@import 'objects/objects.list-inline';
 
 // List-ui
 //@import 'objects/objects.list-ui';
 
 // Media - Image- and text-like content side by side. The poster-child of OOCSS.
-//@import 'objects/objects.media';
+@import 'objects/objects.media';
 
 // Media-island - The media island is designed to isolate media items from other elements.
-//@import 'objects/objects.media-island';
+@import 'objects/objects.media-island';
 
 // Responsive image - The responsive image pattern automatically reserves the space
 //                    needed for an image to be inserted
@@ -99,14 +100,18 @@
 //@import 'objects/objects.table';
 
 // Abbreviations
-//@import 'objects/objects.abbreviations';
+@import 'objects/objects.abbreviations';
 
 
 // COMPONENTS
 //
 // Discrete, complete chunks of UI (e.g. `.c-carousel {}`).
 @import 'components/components.inline-links';
-
+@import 'components/components.pullout';
+@import 'components/components.pull-quote';
+@import 'components/components.example-story';
+@import 'components/components.example-media-asset';
+@import 'components/components.example-sidebar';
 
 // UTILITIES
 //

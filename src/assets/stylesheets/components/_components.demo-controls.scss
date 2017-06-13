@@ -13,13 +13,13 @@
   background-color: $gel-color--orange;
   color: $gel-color--white;
 
-  @include mq($from: gel-bp-s) {
+  @include mq($from: u-bp-s) {
     margin-right: double(-$gel-spacing-unit);
     margin-left: double(-$gel-spacing-unit);
     padding: double($gel-spacing-unit);
   }
 
-  @include mq($from: gel-bp-l) {
+  @include mq($from: u-bp-l) {
     margin: 0 0 quadruple($gel-spacing-unit);
   }
 }
@@ -27,7 +27,7 @@
 .c-demo-controls__options {
   margin-top: $gel-spacing-unit;
 
-  @include mq($from: gel-bp-m) {
+  @include mq($from: u-bp-m) {
     margin-bottom: 0;
     position: absolute;
     bottom: double($gel-spacing-unit);

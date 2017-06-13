@@ -33,7 +33,7 @@
     width: auto;
   }
 
-  @include mq($from: gel-bp-xs) {
+  @include mq($from: u-bp-xs) {
     min-width: 190px;
   }
 
@@ -103,7 +103,7 @@
 .c-demo-header__intro {
   margin: double($gel-spacing-unit) 0;
 
-  @include mq($from: gel-bp-l) {
+  @include mq($from: u-bp-l) {
     margin: quadruple($gel-spacing-unit) 0;
   }
 }

@@ -3,7 +3,7 @@
 //\*------------------------------------*/
 
 // typography
-$gel-type-enable--markup-output: false !default;
+$gel-type-enable--markup-output: true !default;
 
 // grid
 $gel-grid-1280-toggle-class: 'b-pw-1280' !default;
@@ -19,3 +19,5 @@ $jm-global-bg-color: #f7f7f5;
 $jm-global-paragraph-bg-color: $jm-global-bg-color;
 $jm-global-paragraph-link-color: blue;
 $jm-global-paragraph-link-bg-color-focus: #cef;
+
+$jm-global-line-divided-list-divider-color: grey;

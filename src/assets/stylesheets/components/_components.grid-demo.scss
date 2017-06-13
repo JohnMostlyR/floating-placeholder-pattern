@@ -23,7 +23,7 @@
   background-color: #d4e7eb;
   color: $gel-color--black;
 
-  @include mq($from: gel-bp-s) {
+  @include mq($from: u-bp-s) {
     padding: double($gel-spacing-unit);
   }
 }
