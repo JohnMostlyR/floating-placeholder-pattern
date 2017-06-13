@@ -7,7 +7,7 @@
 // @author Shaun Bent
 //
 @mixin gel-wrap() {
-  max-width: $gel-grid-max-width-1008;
+  max-width: $jm-grid-max-width;
   margin: 0 auto;
   padding-right: $gel-spacing-unit;
   padding-left: $gel-spacing-unit;
@@ -15,26 +15,6 @@
   @include mq($from: $gel-grid-margin-change) {
     padding-left: double($gel-spacing-unit);
     padding-right: double($gel-spacing-unit);
-  }
-
-  @if $gel-grid-enable--box-sizing {
-    box-sizing: border-box;
-  }
-
-  @if $gel-grid-enable--1280-breakpoint {
-    @if $gel-grid-1280-toggle-class != null {
-      .#{$gel-grid-1280-toggle-class} & {
-        @include gel-wrap-1280-breakpoint;
-      }
-    } @else {
-      @include gel-wrap-1280-breakpoint;
-    }
-  }
-}
-
-@mixin gel-wrap-1280-breakpoint() {
-  @include mq($from: $gel-grid-max-width-1280) {
-    max-width: $gel-grid-max-width-1280;
   }
 }
 
@@ -99,10 +79,6 @@
 
   @include mq($from: $gel-grid-gutter-change) {
     padding-left: double($gel-spacing-unit); // [2]
-  }
-
-  @if $gel-grid-enable--box-sizing {
-    box-sizing: border-box;
   }
 
   @if $gel-grid-enable--whitespace-fix {
@@ -292,16 +268,6 @@
   @each $breakpoint in $gel-grid-breakpoints {
     @include mq($from: '#{$gel-grid-breakpoint-namespace}#{$breakpoint}') {
       @include _gel-widths($gel-grid-columns, $breakpoint);
-    }
-  }
-
-  @if $gel-grid-1280-toggle-class != null {
-    .#{$gel-grid-1280-toggle-class} {
-      @each $breakpoint in $gel-grid-breakpoints--1280 {
-        @include mq($from: '#{$gel-grid-breakpoint-namespace}#{$breakpoint}') {
-          @include _gel-widths($gel-grid-columns, $breakpoint);
-        }
-      }
     }
   }
 }

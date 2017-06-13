@@ -62,7 +62,6 @@
 // @type List
 //
 $spacing-breakpoints: $gel-grid-breakpoints !default;
-$spacing-breakpoints--1280: $gel-grid-breakpoints--1280 !default;
 
 // Output the spacing classes, adding a breakpoint namespace if required
 //
@@ -521,13 +520,5 @@ $spacing-breakpoints--1280: $gel-grid-breakpoints--1280 !default;
 @each $breakpoint in $spacing-breakpoints {
   @include mq($from: '#{$gel-grid-breakpoint-namespace}#{$breakpoint}') {
     @include _output-spacing-classes($breakpoint);
-  }
-}
-
-.#{$gel-grid-1280-toggle-class} {
-  @each $breakpoint in $spacing-breakpoints--1280 {
-    @include mq($from: '#{$gel-grid-breakpoint-namespace}#{$breakpoint}') {
-      @include _output-spacing-classes($breakpoint);
-    }
   }
 }
