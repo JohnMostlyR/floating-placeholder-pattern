@@ -1,0 +1,103 @@
+///*------------------------------------*\
+//    # REGISTRATION FORM
+//\*------------------------------------*/
+
+/**
+ * [1] No support in, you guessed it, IE and Edge.
+ *     See: https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-within
+ * [2] Experimental technology!
+ *     See: https://developer.mozilla.org/en-US/docs/Web/CSS/:placeholder-shown
+ */
+$c-registration-form-bg-color: #A36200;
+$c-registration-form-body-bg-color: #F90;
+
+.c-registration-form {
+  @include base-font-regular();
+  flex: 0 1 25rem;
+  background-color: $c-registration-form-bg-color;
+  border-radius: .5rem;
+  padding: .5rem;
+}
+
+.c-registration-form__body {
+  padding: .5rem;
+  background-color: $c-registration-form-body-bg-color;
+  border-radius: .5rem;
+}
+
+.c-registration-form__button-group {
+  text-align: center;
+}
+
+.c-registration-form__button {
+  background-color: $c-registration-form-body-bg-color;
+  border: 2px solid $c-registration-form-bg-color;
+  border-radius: .25rem;
+  padding: .5rem;
+}
+
+.c-registration-form__header {
+  color: #FFF;
+  text-align: center;
+}
+
+.c-registration-form__input-group {
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+
+  &:focus-within { /* [1] */
+    > .c-registration-form__label::after {
+      left: 100%;
+      top: 0;
+      transform: scale(.75);
+    }
+  }
+}
+
+.c-registration-form__input {
+  appearance: none;
+  flex: 1 0 100%;
+  width: 100%;
+  font-size: 1rem;
+  outline: none;
+  padding: .5rem;
+  background-color: $c-registration-form-body-bg-color;
+  border: 1px solid $c-registration-form-bg-color;
+  border-radius: .25rem;
+  color: inherit;
+
+  &:invalid {
+    outline: none;
+  }
+
+  &:placeholder-shown { /* [2] */
+    background-color: transparent !important;
+  }
+}
+
+.c-registration-form__label {
+  position: relative;
+  display: inline-block;
+  font-size: 1rem;
+  padding: .5rem;
+
+  &::after {
+    bottom: 0;
+    content: attr(data-placeholder);
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 2.25rem;
+    z-index: -1;
+    color: inherit;
+    font-size: 1rem;
+    font-style: italic;
+    padding: .5rem;
+    transform: scale(1);
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+}

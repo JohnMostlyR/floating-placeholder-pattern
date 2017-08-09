@@ -11,24 +11,13 @@
 
 // Global - Project-wide variables and settings.
 @import 'settings/settings.global';
-@import 'settings/settings.rtl';
-@import 'settings/settings.grid';
 @import 'settings/settings.typography';
 
 
 // TOOLS
 //
 // Site-wide mixins and functions.
-@import '../../../node_modules/sass-mq/mq';
-@import 'tools/tools.clearfix';
-@import 'tools/tools.rem';
-@import 'tools/tools.math';
-@import 'tools/tools.flip';
-@import 'tools/tools.grid';
-@import 'tools/tools.typography';
-@import 'tools/tools.hide';
 @import 'tools/tools.fonts';
-@import 'tools/tools.svg-url';
 
 
 // GENERIC
@@ -46,76 +35,20 @@
 // ELEMENTS
 //
 // Unclassed HTML elements (e.g. `a {}`, `blockquote {}`, `address {}`).
-
-// Page - Set up our document’s default `font-size` and `line-height`.
 @import 'elements/elements.page';
-@import 'elements/elements.images';
-@import 'elements/elements.tables';
-@import 'elements/elements.headings';
-@import 'elements/elements.paragraph';
-@import 'elements/elements.emphasis';
-@import 'elements/elements.quotes';
-@import 'elements/elements.input-range';
-@import 'elements/elements.links';
 
 
 // OBJECTS
 //
 // Objects, abstractions, and design patterns (e.g. `.o-layout {}`).
 
-// Grid - A flexible code implementation of the GEL Foundations Grid.
-@import 'objects/objects.grid';
-
-// Typography - A flexible code implementation of the GEL Foundations Typography.
-@import 'objects/objects.typography';
-
-// Bullet - Align an icon with some text.
-//          Similar to how a bullet point has an icon with some text.
-//@import 'objects/objects.bullet';
-
-// Flag - Table-layout-based advancement on the Media object.
-//@import 'objects/objects.flag';
-
-// Icons -
-//@import 'objects/objects.icons';
-
-// List-inline - A list whose items all sit in a line.
-//@import 'objects/objects.list-inline';
-
-// List-ui
-//@import 'objects/objects.list-ui';
-
-// Media - Image- and text-like content side by side. The poster-child of OOCSS.
-//@import 'objects/objects.media';
-
-// Media-island - The media island is designed to isolate media items from other elements.
-//@import 'objects/objects.media-island';
-
-// Responsive image - The responsive image pattern automatically reserves the space
-//                    needed for an image to be inserted
-@import 'objects/objects.responsive-image';
-
-// Table - Classes for manipulating `table`s.
-//@import 'objects/objects.table';
-
-// Abbreviations
-//@import 'objects/objects.abbreviations';
-
 
 // COMPONENTS
 //
 // Discrete, complete chunks of UI (e.g. `.c-carousel {}`).
-@import 'components/components.inline-links';
+@import 'components/components.registration.form';
 
 
 // UTILITIES
 //
 // High-specificity, very explicit selectors. Overrides and helper classes (e.g. `.u-hidden {}`).
-
-// Clearfix - Bind our clearfix onto a utility class.
-@import 'utilities/utilities.clearfix';
-@import 'utilities/utilities.display';
-@import 'utilities/utilities.floats';
-@import 'utilities/utilities.text-alignment';
-@import 'utilities/utilities.spacing';
-@import 'utilities/utilities.visibility';

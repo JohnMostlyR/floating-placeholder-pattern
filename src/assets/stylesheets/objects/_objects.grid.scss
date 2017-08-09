@@ -1,9 +1,0 @@
-///*------------------------------------*\
-//    # GRID
-//\*------------------------------------*/
-
-//  Create our width helper classes prefixed with any given alias.
-@if $jm-grid-enable--markup-output {
-  @include jm-output-grid;
-  @include jm-output-widths;
-}

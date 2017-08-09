@@ -1,23 +1,50 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  {{> src/partials/_global-head title='Title' }}
+  <meta charset="utf-8">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="./assets/stylesheets/main.css">
+
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-{{!-- MODALS --}}
 
-{{!-- HEADER --}}
-{{> src/partials/_global-page-header }}
+  {{!-- CONTENT --}}
+  <main>
+    <article>
+      <form id="js-registration-form" class="c-registration-form">
+        <h2 class="c-registration-form__header">The Form</h2>
+        <div class="c-registration-form__body">
+          <div class="c-registration-form__input-group">
+            <label
+              for="email"
+              class="c-registration-form__label"
+              data-placeholder="(e.g. my@email.com)">Your email address</label>
+            <input type="text"
+                   id="email"
+                   class="c-registration-form__input"
+                   name="email"
+                   title="Your email address"
+                   placeholder=" "
+                   required>
+          </div>
+          <div class="c-registration-form__input-group">
+            <label for="username" class="c-registration-form__label">Enter a username</label>
+            <input type="text" class="c-registration-form__input" name="username" title="Enter a username">
+          </div>
+          <div class="c-registration-form__input-group">
+            <label for="password" class="c-registration-form__label">Enter a password</label>
+            <input type="password" class="c-registration-form__input" name="password" title="Enter a password">
+          </div>
+          <div class="c-registration-form__button-group">
+            <button type="submit" class="c-registration-form__button">Register</button>
+          </div>
+        </div>
+      </form>
+    </article>
+  </main>
 
-{{!-- CONTENT --}}
-{{> src/partials/_home-page-content }}
-
-{{!-- FOOTER --}}
-{{> src/partials/_global-page-footer }}
-
-{{!-- JAVASCRIPT --}}
-
-{{!-- CSS rel=preload polyfill - https://github.com/filamentgroup/loadCSS --}}
-<script id="inlinejs__preload-polfill">!function(t){'use strict';var e=t.document,r={};r.isPreloadSupported=function(){try{return e.createElement('link').relList.supports('preload')}catch(t){return!1}},r.init=function(){for(var t=e.getElementsByTagName('link'),r=0;r<t.length;r++){var n=t[r];'preload'===n.rel&&'style'===n.getAttribute('as')&&(loadCSS(n.href,n),n.rel=null)}},window.loadCSS&&!r.isPreloadSupported()&&r.init()}(this);</script>
+  {{!-- JAVASCRIPT --}}
 </body>
 </html>

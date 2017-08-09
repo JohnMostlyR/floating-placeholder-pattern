@@ -142,9 +142,9 @@ module.exports = function (grunt) {
           ext: '.html',
         }],
         // helpers: 'src/helpers/*.js',
-        partials: 'src/partials/*.hbs',
+        //partials: 'src/partials/*.hbs',
         registerFullPath: true,
-        templateData: 'src/data/en.json',
+        //templateData: 'src/data/en.json',
       },
     },
 

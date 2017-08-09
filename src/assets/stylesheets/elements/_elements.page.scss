@@ -16,8 +16,14 @@
 html {
   font-size: ($jm-base-font-size / 16px) * 1em; /* [1] */
   line-height: $jm-base-line-height / $jm-base-font-size; /* [1] */
-  //overflow-y: scroll; /* [2] */
+  overflow-y: scroll; /* [2] */
   min-height: 100%; /* [3] */
+}
+
+article {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
 }
 
 /**
@@ -30,5 +36,9 @@ body {
 }
 
 main {
+  align-items: center;
+  display: flex;
+  height: 100vh;
   overflow-x: hidden;
+  width: 100vw;
 }

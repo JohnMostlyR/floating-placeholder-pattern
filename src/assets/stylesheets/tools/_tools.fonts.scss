@@ -6,35 +6,35 @@
 
 // Regular font
 @mixin base-font-regular() {
-  font-family: "LatoRegular", $jm-type-base-font-stack-sans-serif;
+  font-family: $jm-type-base-font-stack-sans-serif;
   font-style: normal !important;
   font-weight: 400 !important;
 }
 
 // Italic font
 @mixin base-font-italic() {
-  font-family: "LatoItalic", $jm-type-base-font-stack-sans-serif;
+  font-family: $jm-type-base-font-stack-sans-serif;
   font-style: italic !important;
   font-weight: 400 !important;
 }
 
 // Bold font
 @mixin base-font-bold() {
-  font-family: "LatoBold", $jm-type-base-font-stack-sans-serif;
+  font-family: $jm-type-base-font-stack-sans-serif;
   font-style: normal !important;
   font-weight: 700 !important;
 }
 
 // Bold Italic font
 @mixin base-font-bold-italic() {
-  font-family: "LatoBoldItalic", $jm-type-base-font-stack-sans-serif;
+  font-family: $jm-type-base-font-stack-sans-serif;
   font-style: italic !important;
   font-weight: 700 !important;
 }
 
 // Heading font
 @mixin heading-font() {
-  font-family: "BreeSerif", $jm-type-base-font-stack-serif;
+  font-family: $jm-type-base-font-stack-serif;
   font-style: normal !important;
   font-weight: 400 !important;
 }
