@@ -43,7 +43,8 @@
     "handlebars": "^4.0.5",
     "imagemin-mozjpeg": "^6.0.0",
     "jit-grunt": "^0.10.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "sass-mq": "^3.3.2"
   },
   "dependencies": {
     "animate-scss": "^3.2.1",
@@ -51,7 +52,8 @@
     "browserslist": "^1.7.5",
     "fg-loadcss": "^1.2.0",
     "font-awesome": "^4.7.0",
-    "normalize.css": "^6.0.0"
+    "normalize.css": "^6.0.0",
+    "snapsvg": "^0.5.1"
   },
   "directories": {
     "test": "test"
