@@ -1,5 +1,7 @@
 # A form with floating placeholder pattern
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Mensae/floating-placeholder-pattern.svg)](https://greenkeeper.io/)
+
 When the user focuses on a field the placeholder moves aside behind the label so the user can still clearly see what input is expected.
 
 This instead of the normal behaviour where the placeholder text is removed as soon as the field gets focus.
